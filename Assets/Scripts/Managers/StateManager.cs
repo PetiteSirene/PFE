@@ -7,9 +7,9 @@ public class StateManager : MonoBehaviour
     // SINGLETON PART
     private static StateManager instance = null;
     public static StateManager Instance => instance;
-
-    //STATE PART
-    private int currentPhase;
+    //
+    
+    private int currentPhase = 0;
     [SerializeField] private int maxPhase;
 
     private void Awake()
@@ -23,8 +23,7 @@ public class StateManager : MonoBehaviour
         {
             instance = this;
         }
-        DontDestroyOnLoad(this.gameObject);  
-        currentPhase = 0;  
+        DontDestroyOnLoad(this.gameObject);   
     }
 
     public void AchievePhase(int i)
