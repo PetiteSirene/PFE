@@ -13,6 +13,7 @@ public class StateManager : MonoBehaviour
     [SerializeField] private int maxPhase;
 
     private TheVRObject theVRObject;
+    private GameObject rightCloud, leftCloud;
 
     private void Awake()
     {
@@ -31,6 +32,8 @@ public class StateManager : MonoBehaviour
     private void Start()
     {
         theVRObject = GameObject.Find("TheVRObject").GetComponent<TheVRObject>();
+        rightCloud = GameObject.Find("RightGroup").gameObject;
+        leftCloud = GameObject.Find("LeftGroup").gameObject;
         theVRObject.transform.position = new Vector3(0,0,200);
     }
 
@@ -73,8 +76,12 @@ public class StateManager : MonoBehaviour
                 {
                     theVRObject.transform.localPosition = Vector3.Lerp(startPos, endPos, elapsedTime / durationTransition);
                     elapsedTime += Time.deltaTime;
+                    rightCloud.transform.Translate(Vector3.right * 10);
+                    leftCloud.transform.Translate(Vector3.left * 10);
                     yield return null;
                 }
+                rightCloud.SetActive(false);
+                leftCloud.SetActive(false);
 
                 //Fin de coroutine
                 Invoke("ToDoAtEndPhase" + currentPhase, 0);

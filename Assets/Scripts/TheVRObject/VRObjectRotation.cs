@@ -9,6 +9,6 @@ public class VRObjectRotation : MonoBehaviour
 
     public void TryToReachTargetRotation(Quaternion targetRotation)
     {
-        transform.Rotate(targetRotation.eulerAngles, Space.World);
+        transform.Rotate(new Vector3(0,0,targetRotation.eulerAngles.x), Space.World);
     }
 }
