@@ -9,7 +9,7 @@ public class StateManager : MonoBehaviour
     public static StateManager Instance => instance;
     //
     
-    private int currentPhase = 0;
+    public int currentPhase = 0;
     [SerializeField] private int maxPhase;
 
     private TheVRObject theVRObject;
@@ -38,23 +38,15 @@ public class StateManager : MonoBehaviour
     {
         if (currentPhase == i)
         {
-            Invoke("ToDoAtEndPhase"+currentPhase, 0);
-            if (currentPhase < maxPhase)
-            {
-                currentPhase ++;
+            StartCoroutine(TransitionFinPhase(i));
 
-            }
-            else
-            {
-                Debug.Log("dernière phase du jeu : " + currentPhase);
-            }
         }
     }
 
     private void ToDoAtEndPhase0()
     {
         Debug.Log("fin de la phase 0");
-        StartCoroutine(TransitionFinPhase0());
+        
     }
 
     private void ToDoAtEndPhase1()
@@ -67,25 +59,49 @@ public class StateManager : MonoBehaviour
         Debug.Log("fin de la phase 2");
     }
 
-    private IEnumerator TransitionFinPhase0()
+    private IEnumerator TransitionFinPhase(int i)
     {
-        float durationTransition = 2.0f;
-        float elapsedTime = 0.0f;
-        Vector3 startPos = theVRObject.transform.localPosition;
-        Vector3 endPos = new Vector3(0.00319828838f, 277.717926f, 155);
-
-        while (elapsedTime < durationTransition)
+        switch (i)
         {
-            theVRObject.transform.localPosition = Vector3.Lerp(startPos, endPos, elapsedTime / durationTransition);
-            elapsedTime += Time.deltaTime;
-            yield return null; 
+            case 0:
+                float durationTransition = 2.0f;
+                float elapsedTime = 0.0f;
+                Vector3 startPos = theVRObject.transform.localPosition;
+                Vector3 endPos = new Vector3(0.00319828838f, 277.717926f, 155);
+
+                while (elapsedTime < durationTransition)
+                {
+                    theVRObject.transform.localPosition = Vector3.Lerp(startPos, endPos, elapsedTime / durationTransition);
+                    elapsedTime += Time.deltaTime;
+                    yield return null;
+                }
+
+                //Fin de coroutine
+                Invoke("ToDoAtEndPhase" + currentPhase, 0);
+                if (currentPhase < maxPhase)
+                {
+                    currentPhase++;
+
+                }
+                else
+                {
+                    Debug.Log("dernière phase du jeu : " + currentPhase);
+                }
+                break;
+
+            case 1:
+                break;
+            default:
+                Debug.Log("Erreur de fin de phase");
+                break;
         }
+        
     }
 
 
     private void Update()
     {
-        Debug.Log(currentPhase);
+        //Debug.Log(currentPhase);
     }
 
 
