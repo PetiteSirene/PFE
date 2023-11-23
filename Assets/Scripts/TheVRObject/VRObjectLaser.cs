@@ -6,7 +6,10 @@ public class VRObjectLaser : MonoBehaviour
 {
     private LineRenderer lineRenderer;
     [SerializeField] private float laserRange;
-    // Start is called before the first frame update
+    [SerializeField] private GameObject impactPoint;
+
+     [SerializeField] private LayerMask collisionLayer;
+
     void Awake()
     {
         lineRenderer = GetComponent<LineRenderer>();
@@ -21,15 +24,18 @@ public class VRObjectLaser : MonoBehaviour
     {
         Vector3 initialPos = transform.position;
         RaycastHit hit;
-        if (Physics.Raycast(initialPos, transform.forward, out hit, laserRange))
+        if (Physics.Raycast(initialPos, transform.forward, out hit, laserRange, collisionLayer))
         {
-            lineRenderer.enabled = true;
+            impactPoint.transform.position = hit.point;
+            impactPoint.SetActive(true);
             lineRenderer.SetPosition(0, initialPos);
             lineRenderer.SetPosition(1, hit.point);
         }
         else
         {
-            lineRenderer.enabled = false;
+            impactPoint.SetActive(false);
+            lineRenderer.SetPosition(0, initialPos);
+            lineRenderer.SetPosition(1, initialPos + 100 * transform.forward);
         }
     }
 }
