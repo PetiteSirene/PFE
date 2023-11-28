@@ -1059,6 +1059,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e2c3f0886e54fd4aaa537f0962d0027, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentPhase: 0
   maxPhase: 2
 --- !u!4 &647048019
 Transform:

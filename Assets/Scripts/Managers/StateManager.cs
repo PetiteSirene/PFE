@@ -76,8 +76,8 @@ public class StateManager : MonoBehaviour
                 {
                     theVRObject.transform.localPosition = Vector3.Lerp(startPos, endPos, elapsedTime / durationTransition);
                     elapsedTime += Time.deltaTime;
-                    rightCloud.transform.Translate(Vector3.right * 10);
-                    leftCloud.transform.Translate(Vector3.left * 10);
+                    rightCloud.transform.Translate(Vector3.right * 1);
+                    leftCloud.transform.Translate(Vector3.left * 1);
                     yield return null;
                 }
                 rightCloud.SetActive(false);
