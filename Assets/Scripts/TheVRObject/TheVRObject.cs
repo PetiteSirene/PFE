@@ -36,14 +36,25 @@ public class TheVRObject : MonoBehaviour
     }
 
 
-    private Vector3 inputRotation;
+    private Quaternion inputRotation, RotationTargetPhase0 = new Quaternion(0.0f,0f,0f,1f);
+    public float marginError;
 
     private void Update()
     {
-        if(stateManager.currentPhase == 1)
+        inputRotation = Quaternion.Euler(new Vector3(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"), 0));
+
+        if (stateManager.currentPhase == 0)
         {
-            inputRotation = new Vector3(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"), 0);
-            vrObjectRotation.TryToReachTargetRotation(Quaternion.Euler(inputRotation));
+            if (Vector3.Distance(inputRotation.eulerAngles, RotationTargetPhase0.eulerAngles) <= marginError)
+            {
+                stateManager.AchievePhase(0);
+            }
+
+        }
+
+        if (stateManager.currentPhase == 1)
+        {
+            vrObjectRotation.TryToReachTargetRotation(inputRotation);
         }
         
 
