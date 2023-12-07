@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,6 +12,7 @@ public class TheVRObject : MonoBehaviour
 
     private VRObjectRotation vrObjectRotation;
     private StateManager stateManager;
+    //private Quaternion initialRotation;
 
     [SerializeField] Quaternion targetRotation;
 
@@ -35,13 +37,18 @@ public class TheVRObject : MonoBehaviour
         vrObjectRotation = GetComponent<VRObjectRotation>();
     }
 
+    /*private void Start()
+    {
+        initialRotation = GetComponent<SerialHandler>().ReceivedQuaternion;
+    }*/
+
 
     private Quaternion inputRotation, RotationTargetPhase0 = new Quaternion(0.0f,0f,0f,1f);
     public float marginError;
 
     private void Update()
     {
-        inputRotation = Quaternion.Euler(new Vector3(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"), 0));
+        inputRotation = GetComponent<SerialHandler>().ReceivedQuaternion;
 
         if (stateManager.currentPhase == 0)
         {
@@ -55,6 +62,7 @@ public class TheVRObject : MonoBehaviour
         if (stateManager.currentPhase == 1)
         {
             vrObjectRotation.TryToReachTargetRotation(inputRotation);
+            //Debug.Log(inputRotation);
         }
         
 
