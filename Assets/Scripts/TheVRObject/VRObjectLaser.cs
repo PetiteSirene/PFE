@@ -7,8 +7,7 @@ public class VRObjectLaser : MonoBehaviour
     private LineRenderer lineRenderer;
     [SerializeField] private float laserRange;
     [SerializeField] private GameObject impactPoint;
-
-     [SerializeField] private LayerMask collisionLayer;
+    [SerializeField] private LayerMask collisionLayer;
 
     void Awake()
     {

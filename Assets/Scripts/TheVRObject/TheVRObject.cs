@@ -11,7 +11,6 @@ public class TheVRObject : MonoBehaviour
     //
 
     private VRObjectRotation vrObjectRotation;
-    private StateManager stateManager;
     //private Quaternion initialRotation;
 
     [SerializeField] Quaternion targetRotation;
@@ -33,7 +32,6 @@ public class TheVRObject : MonoBehaviour
 
     private void LinkComponents()
     {
-        stateManager = GameObject.Find("SuperManager").GetComponent<StateManager>();
         vrObjectRotation = GetComponent<VRObjectRotation>();
     }
 
@@ -46,10 +44,10 @@ public class TheVRObject : MonoBehaviour
     private Quaternion inputRotation, RotationTargetPhase0 = new Quaternion(0.0f,0f,0f,1f);
     public float marginError;
 
+/*
     private void Update()
     {
-        inputRotation = GetComponent<SerialHandler>().ReceivedQuaternion;
-
+        
         if (stateManager.currentPhase == 0)
         {
             if (Vector3.Distance(inputRotation.eulerAngles, RotationTargetPhase0.eulerAngles) <= marginError)
@@ -67,5 +65,6 @@ public class TheVRObject : MonoBehaviour
         
 
     }
+*/
 
 }
