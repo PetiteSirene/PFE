@@ -32,7 +32,6 @@ public class StateManager : MonoBehaviour
     {
         rightCloud = GameObject.Find("RightGroup").gameObject;
         leftCloud = GameObject.Find("LeftGroup").gameObject;
-        TheVRObject.Instance.transform.position = new Vector3(0,0,200);
     }
 
     public void AchievePhase(int i)
@@ -62,7 +61,7 @@ public class StateManager : MonoBehaviour
                 float durationTransition = 2.0f;
                 float elapsedTime = 0.0f;
                 Vector3 startPos = TheVRObject.Instance.transform.localPosition;
-                Vector3 endPos = new Vector3(0.00319828838f, 277.717926f, 155);
+                Vector3 endPos = new Vector3(0f, 275f, 155);
 
                 while (elapsedTime < durationTransition)
                 {
