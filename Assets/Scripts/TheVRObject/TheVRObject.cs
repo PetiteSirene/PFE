@@ -11,6 +11,7 @@ public class TheVRObject : MonoBehaviour
     //
 
     private VRObjectRotation vrObjectRotation;
+    private SerialHandler serialHandler;
     //private Quaternion initialRotation;
 
     [SerializeField] Quaternion targetRotation;
@@ -33,6 +34,7 @@ public class TheVRObject : MonoBehaviour
     private void LinkComponents()
     {
         vrObjectRotation = GetComponent<VRObjectRotation>();
+        serialHandler = GetComponent<SerialHandler>();
     }
 
     /*private void Start()
@@ -41,30 +43,54 @@ public class TheVRObject : MonoBehaviour
     }*/
 
 
-    private Quaternion inputRotation, RotationTargetPhase0 = new Quaternion(0.0f,0f,0f,1f);
+    private Quaternion inputRotation;
+    private Quaternion RotationTargetPhase0 = new Quaternion(0.0f,0f,0f,1f);
     public float marginError;
 
-/*
+
     private void Update()
     {
-        
-        if (stateManager.currentPhase == 0)
+        if (serialHandler.Serial != null)
         {
-            if (Vector3.Distance(inputRotation.eulerAngles, RotationTargetPhase0.eulerAngles) <= marginError)
+            inputRotation = serialHandler.ReceivedQuaternion;
+            if (StateManager.Instance.currentPhase == 0)
             {
-                stateManager.AchievePhase(0);
+                if (Vector3.Distance(inputRotation.eulerAngles, RotationTargetPhase0.eulerAngles) <= marginError)
+                {
+                    StateManager.Instance.AchievePhase(0);
+                }
+
             }
 
+            if (StateManager.Instance.currentPhase == 1)
+            {
+                vrObjectRotation.TryToReachTargetRotation(inputRotation);
+                //Debug.Log(inputRotation);
+            }
         }
-
-        if (stateManager.currentPhase == 1)
+        else
         {
-            vrObjectRotation.TryToReachTargetRotation(inputRotation);
-            //Debug.Log(inputRotation);
+            inputRotation = Quaternion.Euler(new Vector3(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"), 0));
+            if (StateManager.Instance.currentPhase == 0)
+            {
+                if (Vector3.Distance(inputRotation.eulerAngles, RotationTargetPhase0.eulerAngles) <= marginError)
+                {
+                    StateManager.Instance.AchievePhase(0);
+                }
+
+            }
+
+            if (StateManager.Instance.currentPhase == 1)
+            {
+                vrObjectRotation.TryToReachTargetRotationMouse(inputRotation);
+                //Debug.Log(inputRotation);
+            }
         }
+        
+        
         
 
     }
-*/
+
 
 }

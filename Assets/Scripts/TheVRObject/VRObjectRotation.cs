@@ -12,4 +12,8 @@ public class VRObjectRotation : MonoBehaviour
         //transform.Rotate(new Vector3(0,0,targetRotation.eulerAngles.x * rotSpeed), Space.World);
         transform.rotation = targetRotation;
     }
+    public void TryToReachTargetRotationMouse(Quaternion targetRotation)
+    {
+        transform.Rotate(new Vector3(0,0,targetRotation.eulerAngles.x * rotSpeed), Space.World);
+    }
 }

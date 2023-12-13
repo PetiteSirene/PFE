@@ -8,6 +8,7 @@ public class SerialHandler : MonoBehaviour
     private SerialPort _serial;
     private Quaternion receivedQuaternion;
     
+    public SerialPort Serial { get; private set; }
     public Quaternion ReceivedQuaternion { get; private set; }
 
     // Common default serial device on a Windows machine
@@ -55,6 +56,9 @@ public class SerialHandler : MonoBehaviour
     
     private void OnDestroy()
     {
-        _serial.Close();
+        if (Serial != null)
+        {
+            _serial.Close();   
+        }
     }
 }
