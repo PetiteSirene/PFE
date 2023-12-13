@@ -46,8 +46,8 @@ public class TheVRObject : MonoBehaviour
     private Quaternion RotationTargetPhase0 = new Quaternion(0.2f,0f,0f,1f);
     public float marginError;
 
-
-    private void Update()
+/*
+    private void FixedUpdate()
     {
         if (!serialHandler.ArduinoNotConnected)
         {
@@ -92,6 +92,6 @@ public class TheVRObject : MonoBehaviour
         
 
     }
-
+*/
 
 }
