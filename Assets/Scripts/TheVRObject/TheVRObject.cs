@@ -44,7 +44,7 @@ public class TheVRObject : MonoBehaviour
 
 
     private Quaternion inputRotation;
-    private Quaternion RotationTargetPhase0 = new Quaternion(0.0f,0f,0f,1f);
+    private Quaternion RotationTargetPhase0 = new Quaternion(0.2f,0f,0f,1f);
     public float marginError;
 
 
