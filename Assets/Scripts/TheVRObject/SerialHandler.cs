@@ -1,14 +1,16 @@
 ﻿using System;
+using System.IO;
 using System.IO.Ports;
 using UnityEngine;
 
 public class SerialHandler : MonoBehaviour
 {
     
-    private SerialPort _serial;
+    private SerialPort serial;
+    private bool arduinoNotConnected;
     private Quaternion receivedQuaternion;
     
-    public SerialPort Serial { get; private set; }
+    public bool ArduinoNotConnected { get; private set; }
     public Quaternion ReceivedQuaternion { get; private set; }
 
     // Common default serial device on a Windows machine
@@ -18,47 +20,79 @@ public class SerialHandler : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _serial = new SerialPort(serialPort,baudrate);
+        serial = new SerialPort(serialPort,baudrate);
         // Guarantee that the newline is common across environments.
-        _serial.NewLine = "\n";
+        serial.NewLine = "\n";
         // Once configured, the serial communication must be opened just like a file : the OS handles the communication.
-        _serial.Open();
+        try
+        {
+            serial.Open();
+            ArduinoNotConnected = false;
+        }
+        catch (IOException)
+        {
+            ArduinoNotConnected = true;
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        // Prevent blocking if no message is available as we are not doing anything else
-        // Alternative solutions : set a timeout, read messages in another thread, coroutines, futures...
-        if (_serial.BytesToRead <= 0) return;
-        
-        // Trim leading and trailing whitespaces, makes it easier to handle different line endings.
-        // Arduino uses \r\n by default with `.println()`.
-        var message = _serial.ReadLine().Trim().TrimStart('r','/');
-
-        string[] quaternionCoefficientText = message.Split('/');
-        if (quaternionCoefficientText.Length == 4)
+        if (ArduinoNotConnected)
         {
-            float[] qCoeffs = new float[4];
-            for (int i = 0; i < 4; i++)
+            try
             {
-                qCoeffs[i] = float.Parse(quaternionCoefficientText[i]);
+                serial.Open();
+                ArduinoNotConnected = false;
             }
-            Quaternion objectRotation = new Quaternion(qCoeffs[0], qCoeffs[1], qCoeffs[2], qCoeffs[3]);
-            ReceivedQuaternion = objectRotation;
+            catch (IOException)
+            {
+                ArduinoNotConnected = true;
+            }
+        }
+        else
+        {
+            try
+            {
+                // Prevent blocking if no message is available as we are not doing anything else
+                // Alternative solutions : set a timeout, read messages in another thread, coroutines, futures...
+                if (serial.BytesToRead <= 0) return;
+
+                // Trim leading and trailing whitespaces, makes it easier to handle different line endings.
+                // Arduino uses \r\n by default with `.println()`.
+                var message = serial.ReadLine().Trim().TrimStart('r', '/');
+
+                string[] quaternionCoefficientText = message.Split('/');
+                if (quaternionCoefficientText.Length == 4)
+                {
+                    float[] qCoeffs = new float[4];
+                    for (int i = 0; i < 4; i++)
+                    {
+                        qCoeffs[i] = float.Parse(quaternionCoefficientText[i]);
+                    }
+
+                    Quaternion objectRotation = new Quaternion(qCoeffs[0], qCoeffs[1], qCoeffs[2], qCoeffs[3]);
+                    ReceivedQuaternion = objectRotation;
+                }
+            }
+            catch (IOException)
+            {
+                ArduinoNotConnected = true;
+                serial.Close();
+            }
         }
     }
 
     public void SetLed(bool newState)
     {
-        _serial.WriteLine(newState ? "LED ON" : "LED OFF");
+        serial.WriteLine(newState ? "LED ON" : "LED OFF");
     }
     
     private void OnDestroy()
     {
-        if (Serial != null)
+        if (!ArduinoNotConnected)
         {
-            _serial.Close();   
+            serial.Close();   
         }
     }
 }

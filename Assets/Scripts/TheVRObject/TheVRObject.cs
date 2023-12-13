@@ -8,7 +8,6 @@ public class TheVRObject : MonoBehaviour
     // SINGLETON PART
     private static TheVRObject instance = null;
     public static TheVRObject Instance => instance;
-    //
 
     private VRObjectRotation vrObjectRotation;
     private SerialHandler serialHandler;
@@ -50,11 +49,12 @@ public class TheVRObject : MonoBehaviour
 
     private void Update()
     {
-        if (serialHandler.Serial != null)
+        if (!serialHandler.ArduinoNotConnected)
         {
             inputRotation = serialHandler.ReceivedQuaternion;
             if (StateManager.Instance.currentPhase == 0)
             {
+                vrObjectRotation.TryToReachTargetRotation(inputRotation);
                 if (Vector3.Distance(inputRotation.eulerAngles, RotationTargetPhase0.eulerAngles) <= marginError)
                 {
                     StateManager.Instance.AchievePhase(0);
@@ -73,6 +73,7 @@ public class TheVRObject : MonoBehaviour
             inputRotation = Quaternion.Euler(new Vector3(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"), 0));
             if (StateManager.Instance.currentPhase == 0)
             {
+                vrObjectRotation.TryToReachTargetRotationMouse(inputRotation);
                 if (Vector3.Distance(inputRotation.eulerAngles, RotationTargetPhase0.eulerAngles) <= marginError)
                 {
                     StateManager.Instance.AchievePhase(0);
