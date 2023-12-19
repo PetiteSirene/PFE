@@ -69,7 +69,7 @@ public class SerialHandler : MonoBehaviour
                     float[] qCoeffs = new float[4];
                     for (int i = 0; i < 4; i++)
                     {
-                        qCoeffs[i] = float.Parse(quaternionCoefficientText[i]);
+                        qCoeffs[i] = float.Parse(quaternionCoefficientText[i], new CultureInfo("en-US"));
                     }
 
                     Quaternion objectRotation = new Quaternion(qCoeffs[0], qCoeffs[1], qCoeffs[2], qCoeffs[3]);

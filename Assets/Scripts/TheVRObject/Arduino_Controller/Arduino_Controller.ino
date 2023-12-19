@@ -141,3 +141,29 @@ void SendWorldAccel() {
   Serial.print(aaWorld.y); Serial.print("/");
   Serial.println(aaWorld.z);
 }
+
+// Handles incoming messages
+// Called by Arduino if any serial data has been received
+#include <math.h>
+
+int buzzerPin = 8;
+
+float note_A4 = 440.0;
+
+float angle = -90.0/180.0*PI;
+
+float max_delay = 1000.0;
+
+void serialEvent()
+{
+  String message = Serial.readStringUntil('\n');
+  if (message == "LED ON") {
+    digitalWrite(13,HIGH);
+  } else if (message == "LED OFF") {
+    digitalWrite(13,LOW);
+  }
+  float angle_converted = abs(cos(angle));
+  int note_to_play = int(angle_converted*100.0 + note_A4 - 100.0);
+  tone(buzzerPin, note_to_play, 100);
+  delay(max_delay * (1 - angle_converted));
+}
