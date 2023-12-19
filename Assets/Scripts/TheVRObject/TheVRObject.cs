@@ -54,6 +54,7 @@ public class TheVRObject : MonoBehaviour
             if (StateManager.Instance.currentPhase == 0)
             {
                 vrObjectRotation.TryToReachTargetRotation(inputRotation);
+                serialHandler.SendAngularDifference(Quaternion.Angle(inputRotation, RotationTargetPhase0));
                 if (Vector3.Distance(inputRotation.eulerAngles, RotationTargetPhase0.eulerAngles) <= marginError)
                 {
                     StateManager.Instance.AchievePhase(0);
