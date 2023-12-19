@@ -17,7 +17,7 @@ public class VRObjectBall : MonoBehaviour
     {
         if (StateManager.Instance.currentPhase == labyPhase && gameObject.transform.position.y < minHeight)
         {
-            StateManager.Instance.AchievePhase(labyPhase);
+            //StateManager.Instance.AchievePhase(labyPhase);
             Destroy(this);
         }
     }

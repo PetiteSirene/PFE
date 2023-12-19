@@ -35,12 +35,21 @@ void setup() {
 
   mpu.initialize();
   devStatus = mpu.dmpInitialize();
-  mpu.setXGyroOffset(147); //++
+  /*mpu 6050
+  mpu.setXGyroOffset(147); //++ 
   mpu.setYGyroOffset(-618); //--
   mpu.setZGyroOffset(-770);
   mpu.setXAccelOffset(-525);
   mpu.setYAccelOffset(1343);
   mpu.setZAccelOffset(2233);
+  */
+  mpu.setXGyroOffset(81); //++ 
+  mpu.setYGyroOffset(-17); //--
+  mpu.setZGyroOffset(4);
+  mpu.setXAccelOffset(-2059);
+  mpu.setYAccelOffset(-506);
+  mpu.setZAccelOffset(846);
+
 
   if (devStatus == 0) {
     mpu.setDMPEnabled(true);

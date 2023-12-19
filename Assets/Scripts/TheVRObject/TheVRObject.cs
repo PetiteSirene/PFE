@@ -43,7 +43,7 @@ public class TheVRObject : MonoBehaviour
 
 
     private Quaternion inputRotation;
-    private Quaternion RotationTargetPhase0 = new Quaternion(0.2f,0f,0f,1f);
+    private Quaternion RotationTargetPhase0 = Quaternion.Euler( 0.09080228f, -0.05250352f, 0.3077305f);
     public float marginError;
 
     private void Update()
@@ -55,7 +55,11 @@ public class TheVRObject : MonoBehaviour
             {
                 vrObjectRotation.TryToReachTargetRotation(inputRotation);
                 serialHandler.SendAngularDifference(Quaternion.Angle(inputRotation, RotationTargetPhase0));
-                if (Vector3.Distance(inputRotation.eulerAngles, RotationTargetPhase0.eulerAngles) <= marginError)
+                //Debug.Log(Quaternion.Angle(inputRotation, RotationTargetPhase0));
+
+
+
+                if (Quaternion.Angle(inputRotation, RotationTargetPhase0) <= marginError)
                 {
                     StateManager.Instance.AchievePhase(0);
                 }

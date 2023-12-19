@@ -73,7 +73,13 @@ public class SerialHandler : MonoBehaviour
                     }
 
                     Quaternion objectRotation = new Quaternion(qCoeffs[0], qCoeffs[1], qCoeffs[2], qCoeffs[3]);
-                    ReceivedQuaternion = objectRotation;
+                    //Vector3 objectRotationEuler = objectRotation.eulerAngles;
+                    //Vector3 newObjectRotationEuler = new Vector3(-objectRotationEuler.y, objectRotationEuler.x, -objectRotationEuler.z);
+
+                    Quaternion transferQuaternion = Quaternion.Euler(180, 0, 90);
+                    Quaternion objectRotationLeftHanded = new Quaternion(-objectRotation.x, -objectRotation.z, -objectRotation.y, objectRotation.w);
+
+                    ReceivedQuaternion = objectRotationLeftHanded * transferQuaternion  /*Quaternion.Euler(newObjectRotationEuler)*/;
                 }
             }
             catch (IOException)
