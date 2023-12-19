@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.IO;
 using System.IO.Ports;
 using UnityEngine;
@@ -83,9 +84,13 @@ public class SerialHandler : MonoBehaviour
         }
     }
 
-    public void SetLed(bool newState)
+    public void SendAngularDifference(float angle)
     {
-        serial.WriteLine(newState ? "LED ON" : "LED OFF");
+        if (angle < 10)
+        {
+            serial.WriteLine("0.0");
+        }
+        serial.WriteLine(angle.ToString(new CultureInfo("en-US")));
     }
     
     private void OnDestroy()
