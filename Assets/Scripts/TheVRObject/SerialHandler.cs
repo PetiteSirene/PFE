@@ -76,10 +76,12 @@ public class SerialHandler : MonoBehaviour
                     //Vector3 objectRotationEuler = objectRotation.eulerAngles;
                     //Vector3 newObjectRotationEuler = new Vector3(-objectRotationEuler.y, objectRotationEuler.x, -objectRotationEuler.z);
 
-                    Quaternion transferQuaternion = Quaternion.Euler(180, 0, 90);
-                    Quaternion objectRotationLeftHanded = new Quaternion(-objectRotation.x, -objectRotation.z, -objectRotation.y, objectRotation.w);
+                    Quaternion transferQuaternion = Quaternion.Euler(0, 180, 0);
+                    //Quaternion transferQuaternion1 = Quaternion.Euler(0, 180, 90);
+                    //Quaternion objectRotationLeftHanded = new Quaternion(-objectRotation.x, -objectRotation.z, -objectRotation.y, objectRotation.w);
+                    Quaternion objectRotationLeftHanded = new Quaternion(-objectRotation.z, objectRotation.x, objectRotation.y, objectRotation.w);
 
-                    ReceivedQuaternion = objectRotationLeftHanded * transferQuaternion  /*Quaternion.Euler(newObjectRotationEuler)*/;
+                    ReceivedQuaternion = transferQuaternion * objectRotationLeftHanded  /*Quaternion.Euler(newObjectRotationEuler)*/;
                 }
             }
             catch (IOException)
@@ -90,15 +92,22 @@ public class SerialHandler : MonoBehaviour
         }
     }
 
-    public void SendAngularDifference(float angle)
+    /*TODO: Reactivate SendAngularDifference() for later work*/
+    /*public void SendAngularDifference(float angle)
     {
         if (angle < 10)
         {
             serial.WriteLine("0.0");
         }
         serial.WriteLine(angle.ToString(new CultureInfo("en-US")));
-    }
+    }*/
     
+    public void SendBallOut()
+    {
+        Debug.Log("BALL OUT!!!");
+        serial.WriteLine("Ball OUT");
+    }
+
     private void OnDestroy()
     {
         if (!ArduinoNotConnected)

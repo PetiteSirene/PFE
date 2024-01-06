@@ -10,8 +10,9 @@ public class TheVRObject : MonoBehaviour
     public static TheVRObject Instance => instance;
 
     private VRObjectRotation vrObjectRotation;
-    private SerialHandler serialHandler;
-    //private Quaternion initialRotation;
+    public SerialHandler serialHandler;
+    private Quaternion initialRotation;
+    private bool initialRotationSaved;
 
     [SerializeField] Quaternion targetRotation;
 
@@ -36,12 +37,6 @@ public class TheVRObject : MonoBehaviour
         serialHandler = GetComponent<SerialHandler>();
     }
 
-    /*private void Start()
-    {
-        initialRotation = GetComponent<SerialHandler>().ReceivedQuaternion;
-    }*/
-
-
     private Quaternion inputRotation;
     private Quaternion RotationTargetPhase0 = Quaternion.Euler( 0.09080228f, -0.05250352f, 0.3077305f);
     public float marginError;
@@ -53,8 +48,14 @@ public class TheVRObject : MonoBehaviour
             inputRotation = serialHandler.ReceivedQuaternion;
             if (StateManager.Instance.currentPhase == 0)
             {
-                vrObjectRotation.TryToReachTargetRotation(inputRotation);
-                serialHandler.SendAngularDifference(Quaternion.Angle(inputRotation, RotationTargetPhase0));
+                if (!initialRotationSaved)
+                {
+                    initialRotation = GetComponent<SerialHandler>().ReceivedQuaternion;
+                }
+
+                vrObjectRotation.TryToReachTargetRotation(inputRotation);//*Quaternion.Inverse(initialRotation));
+                /*TODO: Reactivate SendAngularDifference() for later work*/
+                //serialHandler.SendAngularDifference(Quaternion.Angle(inputRotation, RotationTargetPhase0));
                 //Debug.Log(Quaternion.Angle(inputRotation, RotationTargetPhase0));
 
 
@@ -68,7 +69,7 @@ public class TheVRObject : MonoBehaviour
 
             if (StateManager.Instance.currentPhase == 1)
             {
-                vrObjectRotation.TryToReachTargetRotation(inputRotation);
+                vrObjectRotation.TryToReachTargetRotation(inputRotation); //*Quaternion.Inverse(initialRotation));
                 //Debug.Log(inputRotation);
             }
         }

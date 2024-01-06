@@ -5,6 +5,7 @@ Uduino uduino("IMU");
 #include "MPU6050_6Axis_MotionApps20.h"
 #include "Wire.h"
 
+int LED = 7;
 
 MPU6050 mpu;
 
@@ -43,6 +44,7 @@ void setup() {
   mpu.setYAccelOffset(1343);
   mpu.setZAccelOffset(2233);
   */
+  
   mpu.setXGyroOffset(81); //++ 
   mpu.setYGyroOffset(-17); //--
   mpu.setZGyroOffset(4);
@@ -166,13 +168,17 @@ float max_delay = 1000.0;
 void serialEvent()
 {
   String message = Serial.readStringUntil('\n');
-  if (message == "LED ON") {
-    digitalWrite(13,HIGH);
-  } else if (message == "LED OFF") {
-    digitalWrite(13,LOW);
+  if (message == "Ball OUT") {
+    digitalWrite(LED,HIGH);
+  } else if (message == "Ball IN") {
+    digitalWrite(LED,LOW);
   }
+
+  /* TODO: Reactivate code below (for angles) for later work */
+  /*
   float angle_converted = abs(cos(angle));
   int note_to_play = int(angle_converted*100.0 + note_A4 - 100.0);
   tone(buzzerPin, note_to_play, 100);
   delay(max_delay * (1 - angle_converted));
+  */
 }
