@@ -4056,7 +4056,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bac63062c369649e881e1eff0d10e7cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  serialPort: COM5
+  serialPort: COM7
   baudrate: 115200
 --- !u!4 &1640436099 stripped
 Transform:

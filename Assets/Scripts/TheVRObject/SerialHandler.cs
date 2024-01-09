@@ -59,7 +59,6 @@ public class SerialHandler : MonoBehaviour
                 // Prevent blocking if no message is available as we are not doing anything else
                 // Alternative solutions : set a timeout, read messages in another thread, coroutines, futures...
                 if (serial.BytesToRead <= 0) return;
-                Debug.Log(serial.ReadExisting());
                 // Trim leading and trailing whitespaces, makes it easier to handle different line endings.
                 // Arduino uses \r\n by default with `.println()`.
                 var message = serial.ReadLine().Trim().TrimStart('r', '/');
