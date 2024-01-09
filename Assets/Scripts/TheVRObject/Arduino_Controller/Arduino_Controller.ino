@@ -36,7 +36,8 @@ void setup() {
 
   mpu.initialize();
   devStatus = mpu.dmpInitialize();
-  /*mpu 6050
+  //mpu 6050
+  /*
   mpu.setXGyroOffset(147); //++ 
   mpu.setYGyroOffset(-618); //--
   mpu.setZGyroOffset(-770);
@@ -44,13 +45,15 @@ void setup() {
   mpu.setYAccelOffset(1343);
   mpu.setZAccelOffset(2233);
   */
+
   
-  mpu.setXGyroOffset(81); //++ 
-  mpu.setYGyroOffset(-17); //--
-  mpu.setZGyroOffset(4);
-  mpu.setXAccelOffset(-2059);
-  mpu.setYAccelOffset(-506);
-  mpu.setZAccelOffset(846);
+  mpu.setXGyroOffset(-504); //++ 
+  mpu.setYGyroOffset(-173); //--
+  mpu.setZGyroOffset(-27);
+  mpu.setXAccelOffset(-142);
+  mpu.setYAccelOffset(117);
+  mpu.setZAccelOffset(1665);
+  
 
 
   if (devStatus == 0) {
