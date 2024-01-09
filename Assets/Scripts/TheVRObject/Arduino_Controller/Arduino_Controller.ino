@@ -173,9 +173,8 @@ void serialEvent()
   String message = Serial.readStringUntil('\n');
   if (message == "Ball OUT") {
     digitalWrite(LED,HIGH);
-  } else if (message == "Ball IN") {
-    digitalWrite(LED,LOW);
   }
+  
 
   /* TODO: Reactivate code below (for angles) for later work */
   /*

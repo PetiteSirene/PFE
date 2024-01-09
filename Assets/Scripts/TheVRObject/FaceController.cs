@@ -19,10 +19,12 @@ public class FaceController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float p = 0.5f + 0.5f * Mathf.Sin(Time.time);
+        float x = 0.5f + 0.5f * Mathf.Sin(Time.time);
+        Vector3 pos = transform.position;
+        Quaternion rot = transform.rotation;
         foreach(Face face in faces)
         {
-            face.Lerp(p);
+            face.Lerp(x, pos, rot);
         }
     }
 }

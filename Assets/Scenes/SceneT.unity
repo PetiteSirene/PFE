@@ -138,6 +138,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   intensity: 1
+  posClose: {x: 0, y: 0, z: 0}
+  posOpen: {x: 0, y: 0, z: 0}
 --- !u!1 &11051024 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8758423527188247893, guid: 5b158b94c373d4b4f9e98cdb92789343,
@@ -157,6 +159,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   intensity: 1
+  posClose: {x: 0, y: 0, z: 0}
+  posOpen: {x: 0, y: 0, z: 0}
 --- !u!1 &67518915
 GameObject:
   m_ObjectHideFlags: 0
@@ -268,14 +272,15 @@ PrefabInstance:
       propertyPath: m_Name
       value: d12.2
       objectReference: {fileID: 0}
+    - target: {fileID: 8242725669697301297, guid: 20f4ca7a410a4f940960f7eff5a217f5,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: ad6d575c7343c4e4e85330d47ac45e7d, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 20f4ca7a410a4f940960f7eff5a217f5,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 157710492}
     - targetCorrespondingSourceObject: {fileID: -3035254845779169503, guid: 20f4ca7a410a4f940960f7eff5a217f5,
         type: 3}
       insertIndex: -1
@@ -403,12 +408,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 157710473}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &157710487 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 20f4ca7a410a4f940960f7eff5a217f5,
-    type: 3}
-  m_PrefabInstance: {fileID: 157710473}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &157710488
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -422,6 +421,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   intensity: 1
+  posClose: {x: 0, y: 0, z: 0}
+  posOpen: {x: 0, y: 0, z: 0}
 --- !u!114 &157710489
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -435,6 +436,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   intensity: 1
+  posClose: {x: 0, y: 0, z: 0}
+  posOpen: {x: 0, y: 0, z: 0}
 --- !u!114 &157710490
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -448,6 +451,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   intensity: 1
+  posClose: {x: 0, y: 0, z: 0}
+  posOpen: {x: 0, y: 0, z: 0}
 --- !u!114 &157710491
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -461,31 +466,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   intensity: 1
---- !u!114 &157710492
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 157710487}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8ed9b6d5eee687b49b117d91a8c895f5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  faces:
-  - {fileID: 157710491}
-  - {fileID: 157710490}
-  - {fileID: 157710489}
-  - {fileID: 157710488}
-  - {fileID: 1962960746}
-  - {fileID: 39188295}
-  - {fileID: 188357112}
-  - {fileID: 1709855651}
-  - {fileID: 1936759381}
-  - {fileID: 1231557057}
-  - {fileID: 981108894}
-  - {fileID: 1233875}
+  posClose: {x: 0, y: 0, z: 0}
+  posOpen: {x: 0, y: 0, z: 0}
 --- !u!1 &158220876 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4283425761326543017, guid: 1f4d373a613d0466fbd8849470265852,
@@ -505,6 +487,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   intensity: 1
+  posClose: {x: 0, y: 0, z: 0}
+  posOpen: {x: 0, y: 0, z: 0}
 --- !u!1 &319087261
 GameObject:
   m_ObjectHideFlags: 0
@@ -1584,6 +1568,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   intensity: 1
+  posClose: {x: 0, y: 0, z: 0}
+  posOpen: {x: 0, y: 0, z: 0}
 --- !u!1 &1045848415
 GameObject:
   m_ObjectHideFlags: 0
@@ -1629,6 +1615,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   intensity: 1
+  posClose: {x: 0, y: 0, z: 0}
+  posOpen: {x: 0, y: 0, z: 0}
 --- !u!1 &1261028726
 GameObject:
   m_ObjectHideFlags: 0
@@ -2166,6 +2154,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   intensity: 1
+  posClose: {x: 0, y: 0, z: 0}
+  posOpen: {x: 0, y: 0, z: 0}
 --- !u!1 &1725982592
 GameObject:
   m_ObjectHideFlags: 0
@@ -2501,6 +2491,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   intensity: 1
+  posClose: {x: 0, y: 0, z: 0}
+  posOpen: {x: 0, y: 0, z: 0}
 --- !u!114 &1962960746
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2514,6 +2506,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   intensity: 1
+  posClose: {x: 0, y: 0, z: 0}
+  posOpen: {x: 0, y: 0, z: 0}
 --- !u!1 &1973733335
 GameObject:
   m_ObjectHideFlags: 0
@@ -2526,6 +2520,7 @@ GameObject:
   - component: {fileID: 1973733337}
   - component: {fileID: 1973733336}
   - component: {fileID: 1973733339}
+  - component: {fileID: 1973733340}
   m_Layer: 0
   m_Name: TheVRObject
   m_TagString: Untagged
@@ -2593,6 +2588,31 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   serialPort: COM5
   baudrate: 115200
+--- !u!114 &1973733340
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1973733335}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ed9b6d5eee687b49b117d91a8c895f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  faces:
+  - {fileID: 157710491}
+  - {fileID: 157710490}
+  - {fileID: 157710489}
+  - {fileID: 157710488}
+  - {fileID: 1962960746}
+  - {fileID: 39188295}
+  - {fileID: 188357112}
+  - {fileID: 1709855651}
+  - {fileID: 1936759381}
+  - {fileID: 1231557057}
+  - {fileID: 981108894}
+  - {fileID: 1233875}
 --- !u!1 &2036353228
 GameObject:
   m_ObjectHideFlags: 0

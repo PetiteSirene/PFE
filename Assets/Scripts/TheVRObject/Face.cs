@@ -5,20 +5,20 @@ using UnityEngine;
 public class Face : MonoBehaviour
 {
     [SerializeField] private float intensity;
-    private Vector3 posClose;
-    private Vector3 posOpen;
+    [SerializeField]private Vector3 posClose;
+    [SerializeField]private Vector3 posOpen;
 
 
     public void Initialize(Vector3 posCenter)
     {
         Vector3 pos = transform.position;
-        posClose = pos;
-        posOpen = pos + intensity * (pos - posCenter);   
+        posClose = pos - posCenter;
+        posOpen = posClose * (1 + intensity);   
     }
 
-    public void Lerp (float p)  // 0 <= p <= 1;
+    public void Lerp (float p, Vector3 pos, Quaternion rot)  // 0 <= p <= 1;
     {
-        transform.position = Vector3.Lerp(posClose, posOpen, p);
+        transform.position = Vector3.Lerp(pos + rot * posClose, pos + rot * posOpen, p);
     }
 
     
