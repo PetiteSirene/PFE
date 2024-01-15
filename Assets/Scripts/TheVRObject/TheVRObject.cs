@@ -53,7 +53,7 @@ public class TheVRObject : MonoBehaviour
                     initialRotation = GetComponent<SerialHandler>().ReceivedQuaternion;
                 }
 
-                vrObjectRotation.TryToReachTargetRotation(inputRotation);//*Quaternion.Inverse(initialRotation));
+                vrObjectRotation.SetRotation(inputRotation);//*Quaternion.Inverse(initialRotation));
                 /*TODO: Reactivate SendAngularDifference() for later work*/
                 //serialHandler.SendAngularDifference(Quaternion.Angle(inputRotation, RotationTargetPhase0));
                 //Debug.Log(Quaternion.Angle(inputRotation, RotationTargetPhase0));
@@ -69,16 +69,15 @@ public class TheVRObject : MonoBehaviour
 
             if (StateManager.Instance.currentPhase == 1)
             {
-                vrObjectRotation.TryToReachTargetRotation(inputRotation); //*Quaternion.Inverse(initialRotation));
+                vrObjectRotation.SetRotation(inputRotation); //*Quaternion.Inverse(initialRotation));
                 //Debug.Log(inputRotation);
             }
         }
         else
         {
-            inputRotation = Quaternion.Euler(new Vector3(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"), 0));
             if (StateManager.Instance.currentPhase == 0)
             {
-                vrObjectRotation.TryToReachTargetRotationMouse(inputRotation);
+                vrObjectRotation.AddRotation(GetInputDir());
                 if (Vector3.Distance(inputRotation.eulerAngles, RotationTargetPhase0.eulerAngles) <= marginError)
                 {
                     StateManager.Instance.AchievePhase(0);
@@ -88,7 +87,7 @@ public class TheVRObject : MonoBehaviour
 
             if (StateManager.Instance.currentPhase == 1)
             {
-                vrObjectRotation.TryToReachTargetRotationMouse(inputRotation);
+                vrObjectRotation.AddRotation(GetInputDir());
                 //Debug.Log(inputRotation);
             }
         }
@@ -96,6 +95,50 @@ public class TheVRObject : MonoBehaviour
         
         
 
+    }
+
+    private Vector3 GetInputDir()
+    {
+        float x, y, z;
+        if (Input.GetKey(KeyCode.Q))
+        {
+            x = -1;
+        }
+        else if(Input.GetKey(KeyCode.D))
+        {
+            x = 1;
+        }
+        else
+        {
+            x = 0;
+        }
+
+        if (Input.GetKey(KeyCode.S))
+        {
+            y = -1;
+        }
+        else if(Input.GetKey(KeyCode.Z))
+        {
+            y = 1;
+        }
+        else
+        {
+            y = 0;
+        }
+
+        if (Input.GetKey(KeyCode.A))
+        {
+            z = -1;
+        }
+        else if(Input.GetKey(KeyCode.E))
+        {
+            z = 1;
+        }
+        else
+        {
+            z = 0;
+        }
+        return new Vector3(x,y,z);
     }
 
 }

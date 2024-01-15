@@ -7,13 +7,13 @@ public class VRObjectRotation : MonoBehaviour
     [SerializeField] float rotSpeed;
     [SerializeField] float maxDelta;
 
-    public void TryToReachTargetRotation(Quaternion targetRotation)
+    public void SetRotation(Quaternion quat)
     {
         //transform.Rotate(new Vector3(0,0,targetRotation.eulerAngles.x * rotSpeed), Space.World);
-        transform.rotation = targetRotation;
+        transform.rotation = quat;
     }
-    public void TryToReachTargetRotationMouse(Quaternion targetRotation)
+    public void AddRotation(Vector3 rotation)
     {
-        transform.Rotate(new Vector3(0,0,targetRotation.eulerAngles.x * rotSpeed), Space.World);
+        transform.Rotate(rotation);
     }
 }
