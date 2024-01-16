@@ -10,6 +10,7 @@ public class SerialHandler : MonoBehaviour
     private SerialPort serial;
     private bool arduinoNotConnected;
     private Quaternion receivedQuaternion;
+    public GameObject ball;
     
     public bool ArduinoNotConnected { get; private set; }
     public Quaternion ReceivedQuaternion { get; private set; }
@@ -105,6 +106,7 @@ public class SerialHandler : MonoBehaviour
     
     public void SendBallOut()
     {
+        ball.transform.SetParent(null);
         Debug.Log("BALL OUT!!!");
         serial.WriteLine("Ball OUT");
     }
