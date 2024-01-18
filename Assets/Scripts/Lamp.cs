@@ -5,7 +5,8 @@ using UnityEngine;
 public class Lamp : MonoBehaviour
 {
     [SerializeField] private List<ParticleSystem> fireVFXs;
-
+    private bool isLit = false;
+    public bool IsLit => isLit;
 
     public void Lit()
     {
@@ -13,7 +14,11 @@ public class Lamp : MonoBehaviour
         {
             vfx.Play();
         }
+        isLit = true;
+        StateManager.Instance.CheckLamps();
     }
+
+    
 
 
 }

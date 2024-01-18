@@ -46,7 +46,7 @@ public class TheVRObject : MonoBehaviour
         if (!serialHandler.ArduinoNotConnected)
         {
             inputRotation = serialHandler.ReceivedQuaternion;
-            if (StateManager.Instance.currentPhase == 0)
+            if (StateManager.Instance.CurrentPhase == 0)
             {
                 if (!initialRotationSaved)
                 {
@@ -67,7 +67,7 @@ public class TheVRObject : MonoBehaviour
 
             }
 
-            if (StateManager.Instance.currentPhase == 1)
+            if (StateManager.Instance.CurrentPhase == 1)
             {
                 vrObjectRotation.SetRotation(inputRotation); //*Quaternion.Inverse(initialRotation));
                 //Debug.Log(inputRotation);
@@ -75,7 +75,7 @@ public class TheVRObject : MonoBehaviour
         }
         else
         {
-            if (StateManager.Instance.currentPhase == 0)
+            if (StateManager.Instance.CurrentPhase == 0)
             {
                 vrObjectRotation.AddRotation(GetInputDir());
                 if (Vector3.Distance(inputRotation.eulerAngles, RotationTargetPhase0.eulerAngles) <= marginError)
@@ -85,7 +85,7 @@ public class TheVRObject : MonoBehaviour
 
             }
 
-            if (StateManager.Instance.currentPhase == 1)
+            if (StateManager.Instance.CurrentPhase == 1)
             {
                 vrObjectRotation.AddRotation(GetInputDir());
                 //Debug.Log(inputRotation);

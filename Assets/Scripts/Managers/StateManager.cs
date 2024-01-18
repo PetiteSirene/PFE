@@ -9,10 +9,14 @@ public class StateManager : MonoBehaviour
     public static StateManager Instance => instance;
     //
     
-    public int currentPhase = 0;
-    [SerializeField] private int maxPhase;
+    private int currentPhase = 0;
+    public int CurrentPhase => currentPhase;
+    private int laserPhase = 2;
+    private int maxPhase = 3;
+    
 
     private GameObject rightCloud, leftCloud;
+    [SerializeField] private List<Lamp> lamps;
 
     public bool clouds = true;
 
@@ -87,11 +91,26 @@ public class StateManager : MonoBehaviour
                 break;
             case 2:
                 break;
+            case 3:
+                break;
             default:
                 Debug.Log("Erreur de fin de phase");
                 break;
         }
         
+    }
+
+    public void CheckLamps()
+    {
+        foreach(Lamp lamp in lamps)
+        {
+            if(!lamp.IsLit)
+            {
+                return;
+            }
+        }
+        AchievePhase(laserPhase);
+
     }
 
 }

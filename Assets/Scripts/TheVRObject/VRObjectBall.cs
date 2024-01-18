@@ -21,7 +21,7 @@ public class VRObjectBall : MonoBehaviour
 
     void TryWinLaby()
     {
-        if (StateManager.Instance.currentPhase == labyPhase && gameObject.transform.position.y < minHeight)
+        if (StateManager.Instance.CurrentPhase == labyPhase && gameObject.transform.position.y < minHeight)
         {
             //StateManager.Instance.AchievePhase(labyPhase);
             Destroy(this);
