@@ -63,7 +63,6 @@ public class SerialHandler : MonoBehaviour
                 // Trim leading and trailing whitespaces, makes it easier to handle different line endings.
                 // Arduino uses \r\n by default with `.println()`.
                 var message = serial.ReadLine().Trim().TrimStart('r', '/');
-                Debug.Log(message);
                 string[] quaternionCoefficientText = message.Split('/');
                 if (quaternionCoefficientText.Length == 4)
                 {
@@ -83,7 +82,6 @@ public class SerialHandler : MonoBehaviour
                     Quaternion objectRotationLeftHanded = new Quaternion(-objectRotation.z, objectRotation.x, objectRotation.y, objectRotation.w);
 
                     ReceivedQuaternion = transferQuaternion * objectRotationLeftHanded  /*Quaternion.Euler(newObjectRotationEuler)*/;
-                    Debug.Log(ReceivedQuaternion);
                 }
             }
             catch (IOException)

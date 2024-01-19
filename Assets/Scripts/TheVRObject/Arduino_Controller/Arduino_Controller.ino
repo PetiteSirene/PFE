@@ -25,6 +25,9 @@ VectorFloat gravity;    // [x, y, z]            gravity vector
 float euler[3];         // [psi, theta, phi]    Euler angle container
 float ypr[3];           // [yaw, pitch, roll]   yaw/pitch/roll container and gravity vector
 
+int oldTime;
+int timer;
+int ms_since_last_beep;
 
 void setup() {
   Wire.begin();
@@ -37,14 +40,21 @@ void setup() {
   mpu.initialize();
   devStatus = mpu.dmpInitialize();
   //mpu 6050
-  
+  /*
   mpu.setXGyroOffset(147); //++ 
   mpu.setYGyroOffset(-618); //--
   mpu.setZGyroOffset(-770);
   mpu.setXAccelOffset(-525);
   mpu.setYAccelOffset(1343);
   mpu.setZAccelOffset(2233);
-  
+  */
+  //nv mpu6050
+  mpu.setXGyroOffset(-5); //++ 
+  mpu.setYGyroOffset(-50); //--
+  mpu.setZGyroOffset(29);
+  mpu.setXAccelOffset(-2219);
+  mpu.setYAccelOffset(1287);
+  mpu.setZAccelOffset(1289);
 
   //gyro module IoT
   /*
@@ -99,6 +109,9 @@ void loop() {
       //SendWorldAccel();
     }
   }
+  oldTime = timer;
+  timer = millis();
+  ms_since_last_beep += timer - oldTime;
 }
 
 
@@ -179,8 +192,13 @@ void serialEvent()
   
   float angle = message.toFloat();
   float angle_converted = abs(cos(angle));
+  float max_period = 5000; //en ms
+  float period =  max_period * (1 - angle_converted);
   int note_to_play = int(angle_converted*100.0 + note_A4 - 100.0);
-  tone(buzzerPin, note_to_play, 100);
-  delay(max_delay * (1 - angle_converted));
+  //delay(max_delay * (1 - angle_converted));
+  if (ms_since_last_beep > period) {
+    tone(buzzerPin, note_to_play, 100);
+    ms_since_last_beep = 0;
+  }
   
 }

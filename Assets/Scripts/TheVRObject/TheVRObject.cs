@@ -15,6 +15,7 @@ public class TheVRObject : MonoBehaviour
     private bool initialRotationSaved;
 
     [SerializeField] Quaternion targetRotation;
+    [SerializeField] private float initTimer;
 
     private void Awake()
     {
@@ -40,9 +41,11 @@ public class TheVRObject : MonoBehaviour
     private Quaternion inputRotation;
     private Quaternion RotationTargetPhase0 = Quaternion.Euler( 0.09080228f, -0.05250352f, 0.3077305f);
     public float marginError;
+    private float timeAtTarget;
 
     private void Update()
     {
+        initTimer += Time.deltaTime;
         if (!serialHandler.ArduinoNotConnected)
         {
             inputRotation = serialHandler.ReceivedQuaternion;
@@ -57,11 +60,17 @@ public class TheVRObject : MonoBehaviour
                 /*TODO: Reactivate SendAngularDifference() for later work*/
                 serialHandler.SendAngularDifference(Quaternion.Angle(inputRotation, RotationTargetPhase0));
                 Debug.Log(inputRotation.eulerAngles);
+                Debug.Log("timer Ard: " + 10 * (1 - Math.Abs(Math.Cos(Quaternion.Angle(inputRotation, RotationTargetPhase0)))));
                 Debug.Log(Quaternion.Angle(inputRotation, RotationTargetPhase0));
 
 
+                
+                if (Quaternion.Angle(inputRotation, RotationTargetPhase0) <= marginError && initTimer > 3f)
+                {
+                    timeAtTarget += Time.deltaTime;
+                }
 
-                if (Quaternion.Angle(inputRotation, RotationTargetPhase0) <= marginError)
+                if (timeAtTarget > 0.5f)
                 {
                     StateManager.Instance.AchievePhase(0);
                 }
@@ -72,6 +81,8 @@ public class TheVRObject : MonoBehaviour
             {
                 vrObjectRotation.SetRotation(inputRotation); //*Quaternion.Inverse(initialRotation));
                 //Debug.Log(inputRotation);
+                Debug.Log(inputRotation.eulerAngles);
+                Debug.Log(Quaternion.Angle(inputRotation, RotationTargetPhase0));
             }
         }
         else
