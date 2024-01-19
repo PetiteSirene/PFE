@@ -191,7 +191,7 @@ void serialEvent()
   /* TODO: Reactivate code below (for angles) for later work */
   
   float angle = message.toFloat();
-  float angle_converted = abs(cos(angle));
+  float angle_converted = abs(cos(angle/180.0*PI));
   float max_period = 5000; //en ms
   float period =  max_period * (1 - angle_converted);
   int note_to_play = int(angle_converted*100.0 + note_A4 - 100.0);
