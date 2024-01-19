@@ -55,8 +55,9 @@ public class TheVRObject : MonoBehaviour
 
                 vrObjectRotation.SetRotation(inputRotation);//*Quaternion.Inverse(initialRotation));
                 /*TODO: Reactivate SendAngularDifference() for later work*/
-                //serialHandler.SendAngularDifference(Quaternion.Angle(inputRotation, RotationTargetPhase0));
-                //Debug.Log(Quaternion.Angle(inputRotation, RotationTargetPhase0));
+                serialHandler.SendAngularDifference(Quaternion.Angle(inputRotation, RotationTargetPhase0));
+                Debug.Log(inputRotation.eulerAngles);
+                Debug.Log(Quaternion.Angle(inputRotation, RotationTargetPhase0));
 
 
 

@@ -37,23 +37,24 @@ void setup() {
   mpu.initialize();
   devStatus = mpu.dmpInitialize();
   //mpu 6050
-  /*
+  
   mpu.setXGyroOffset(147); //++ 
   mpu.setYGyroOffset(-618); //--
   mpu.setZGyroOffset(-770);
   mpu.setXAccelOffset(-525);
   mpu.setYAccelOffset(1343);
   mpu.setZAccelOffset(2233);
-  */
-
   
+
+  //gyro module IoT
+  /*
   mpu.setXGyroOffset(-504); //++ 
   mpu.setYGyroOffset(-173); //--
   mpu.setZGyroOffset(-27);
   mpu.setXAccelOffset(-142);
   mpu.setYAccelOffset(117);
   mpu.setZAccelOffset(1665);
-  
+  */
 
 
   if (devStatus == 0) {
@@ -164,23 +165,22 @@ int buzzerPin = 8;
 
 float note_A4 = 440.0;
 
-float angle = -90.0/180.0*PI;
-
 float max_delay = 1000.0;
 
 void serialEvent()
 {
   String message = Serial.readStringUntil('\n');
-  if (message == "Ball OUT") {
+  /*if (message == "Ball OUT") {
     digitalWrite(LED,HIGH);
-  }
+  }*/
   
 
   /* TODO: Reactivate code below (for angles) for later work */
-  /*
+  
+  float angle = message.toFloat();
   float angle_converted = abs(cos(angle));
   int note_to_play = int(angle_converted*100.0 + note_A4 - 100.0);
   tone(buzzerPin, note_to_play, 100);
   delay(max_delay * (1 - angle_converted));
-  */
+  
 }

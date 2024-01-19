@@ -95,14 +95,17 @@ public class SerialHandler : MonoBehaviour
     }
 
     /*TODO: Reactivate SendAngularDifference() for later work*/
-    /*public void SendAngularDifference(float angle)
+    public void SendAngularDifference(float angle)
     {
         if (angle < 10)
         {
             serial.WriteLine("0.0");
         }
-        serial.WriteLine(angle.ToString(new CultureInfo("en-US")));
-    }*/
+        else
+        {
+            serial.WriteLine(angle.ToString(new CultureInfo("en-US")));   
+        }
+    }
     
     public void SendBallOut()
     {
