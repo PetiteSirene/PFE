@@ -3,6 +3,7 @@ using System.Globalization;
 using System.IO;
 using System.IO.Ports;
 using UnityEngine;
+using System.Collections;
 
 public class SerialHandler : MonoBehaviour
 {
@@ -18,7 +19,7 @@ public class SerialHandler : MonoBehaviour
     // Common default serial device on a Windows machine
     [SerializeField] private string serialPort = "COM1";
     [SerializeField] private int baudrate = 115200;
-    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -35,6 +36,7 @@ public class SerialHandler : MonoBehaviour
         {
             ArduinoNotConnected = true;
         }
+        StartCoroutine(WaitCoroutine(3));
     }
 
     // Update is called once per frame
@@ -42,7 +44,6 @@ public class SerialHandler : MonoBehaviour
     {
         if (ArduinoNotConnected)
         {
-            
             try
             {
                 serial.Open();
@@ -72,7 +73,7 @@ public class SerialHandler : MonoBehaviour
                         qCoeffs[i] = float.Parse(quaternionCoefficientText[i], new CultureInfo("en-US"));
                     }
 
-                    Quaternion objectRotation = new Quaternion(qCoeffs[0], qCoeffs[1], qCoeffs[2], qCoeffs[3]);
+                    Quaternion objectRotation = new Quaternion(qCoeffs[0], -qCoeffs[1], -qCoeffs[2], qCoeffs[3]);
                     //Vector3 objectRotationEuler = objectRotation.eulerAngles;
                     //Vector3 newObjectRotationEuler = new Vector3(-objectRotationEuler.y, objectRotationEuler.x, -objectRotationEuler.z);
 
@@ -118,5 +119,10 @@ public class SerialHandler : MonoBehaviour
         {
             serial.Close();   
         }
+    }
+
+    IEnumerator WaitCoroutine(int sec)
+    {
+        yield return new WaitForSeconds(sec);
     }
 }

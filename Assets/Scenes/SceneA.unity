@@ -1218,7 +1218,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 3a6918e96274597498d0775f900dd525, type: 2}
+      objectReference: {fileID: 2100000, guid: f5f7843dad0cfbf449140dce45f4b579, type: 2}
     - target: {fileID: 919132149155446097, guid: 53620049445a3c34a961f749e1a33180,
         type: 3}
       propertyPath: m_Name
@@ -1248,7 +1248,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 3a6918e96274597498d0775f900dd525, type: 2}
+      objectReference: {fileID: 2100000, guid: c471dfddf440b56468e5d70694c1401f, type: 2}
     - target: {fileID: 9163872073559038837, guid: 53620049445a3c34a961f749e1a33180,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -6235,7 +6235,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ball: {fileID: 1230295798}
-  serialPort: /dev/cu.usbmodem1401
+  serialPort: COM7
   baudrate: 115200
 --- !u!4 &1640436099 stripped
 Transform:

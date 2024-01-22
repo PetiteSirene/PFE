@@ -11,8 +11,6 @@ public class TheVRObject : MonoBehaviour
 
     private VRObjectRotation vrObjectRotation;
     public SerialHandler serialHandler;
-    private Quaternion initialRotation;
-    private bool initialRotationSaved;
 
     [SerializeField] Quaternion targetRotation;
     [SerializeField] private float initTimer;
@@ -49,15 +47,14 @@ public class TheVRObject : MonoBehaviour
         if (!serialHandler.ArduinoNotConnected)
         {
             inputRotation = serialHandler.ReceivedQuaternion;
+            if (Input.GetKeyDown(KeyCode.I))
+            {
+                vrObjectRotation.InitRotation(inputRotation);
+            }
             if (StateManager.Instance.CurrentPhase == 0)
             {
-                if (!initialRotationSaved)
-                {
-                    initialRotation = GetComponent<SerialHandler>().ReceivedQuaternion;
-                }
 
-                vrObjectRotation.SetRotation(inputRotation);//*Quaternion.Inverse(initialRotation));
-                /*TODO: Reactivate SendAngularDifference() for later work*/
+                vrObjectRotation.SetRotation(inputRotation);
                 serialHandler.SendAngularDifference(Quaternion.Angle(inputRotation, RotationTargetPhase0));
                 Debug.Log(inputRotation.eulerAngles);
                 Debug.Log("timer Ard: " + 10 * (1 - Math.Abs(Math.Cos(Quaternion.Angle(inputRotation, RotationTargetPhase0)))));
