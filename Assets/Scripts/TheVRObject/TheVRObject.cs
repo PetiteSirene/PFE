@@ -12,7 +12,7 @@ public class TheVRObject : MonoBehaviour
     private VRObjectRotation vrObjectRotation;
     public SerialHandler serialHandler;
 
-    [SerializeField] Quaternion targetRotation;
+    [SerializeField] Vector3 targetRotation;
     [SerializeField] private float initTimer;
 
     private void Awake()
@@ -37,7 +37,6 @@ public class TheVRObject : MonoBehaviour
     }
 
     private Quaternion inputRotation;
-    private Quaternion RotationTargetPhase0 = Quaternion.Euler( 0.09080228f, -0.05250352f, 0.3077305f);
     public float marginError;
     private float timeAtTarget;
 
@@ -55,31 +54,27 @@ public class TheVRObject : MonoBehaviour
             {
 
                 vrObjectRotation.SetRotation(inputRotation);
-                serialHandler.SendAngularDifference(Quaternion.Angle(inputRotation, RotationTargetPhase0));
-                Debug.Log(inputRotation.eulerAngles);
-                Debug.Log("timer Ard: " + 10 * (1 - Math.Abs(Math.Cos(Quaternion.Angle(inputRotation, RotationTargetPhase0)))));
-                Debug.Log(Quaternion.Angle(inputRotation, RotationTargetPhase0));
-
-
+                serialHandler.SendAngularDifference(vrObjectRotation.GetAngle(inputRotation, targetRotation));
                 
-                if (Quaternion.Angle(inputRotation, RotationTargetPhase0) <= marginError && initTimer > 3f)
+                if (vrObjectRotation.GetAngle(inputRotation, targetRotation) <= marginError && initTimer > 3f)
                 {
                     timeAtTarget += Time.deltaTime;
+                    if (timeAtTarget > 0.5f)
+                    {
+                        StateManager.Instance.AchievePhase(0);
+                    }
+                }
+                else 
+                {
+                    timeAtTarget = 0;
                 }
 
-                if (timeAtTarget > 0.5f)
-                {
-                    StateManager.Instance.AchievePhase(0);
-                }
 
             }
 
             if (StateManager.Instance.CurrentPhase == 1)
             {
-                vrObjectRotation.SetRotation(inputRotation); //*Quaternion.Inverse(initialRotation));
-                //Debug.Log(inputRotation);
-                Debug.Log(inputRotation.eulerAngles);
-                Debug.Log(Quaternion.Angle(inputRotation, RotationTargetPhase0));
+                vrObjectRotation.SetRotation(inputRotation);
             }
         }
         else
@@ -87,9 +82,17 @@ public class TheVRObject : MonoBehaviour
             if (StateManager.Instance.CurrentPhase == 0)
             {
                 vrObjectRotation.AddRotation(GetInputDir());
-                if (Vector3.Distance(inputRotation.eulerAngles, RotationTargetPhase0.eulerAngles) <= marginError)
+                if (vrObjectRotation.GetAngle(inputRotation, targetRotation) <= marginError)
                 {
-                    StateManager.Instance.AchievePhase(0);
+                    timeAtTarget += Time.deltaTime;
+                    if (timeAtTarget > 0.5f)
+                    {
+                        StateManager.Instance.AchievePhase(0);
+                    }
+                }
+                else 
+                {
+                    timeAtTarget = 0;
                 }
 
             }
