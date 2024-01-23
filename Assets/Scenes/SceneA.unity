@@ -2367,8 +2367,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f48a957ebef25d843a87a9f5d678e31a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Jingle1: {fileID: 449343744}
-  Jingle2: {fileID: 449343743}
+  Jingles:
+  - {fileID: 449343744}
+  - {fileID: 449343743}
 --- !u!4 &490077159 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 630598172490900526, guid: f953dd42b31bfc94898bdc486560e6a5,
