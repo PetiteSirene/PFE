@@ -190,11 +190,11 @@ void serialEvent()
 
   /* TODO: Reactivate code below (for angles) for later work */
   
-  float angledist = message.toFloat();
-  float dist_converted = abs(cos(angledist/180.0*PI));
-  float max_period = 5000; //en ms
-  float period =  max_period * (1.05 - dist_converted);
-  int note_to_play = int(dist_converted*100.0 + note_A4 - 100.0);
+  float angledist = message.toFloat()/180.0f;
+  Serial.println(angledist);
+  float max_period = 3000; //en ms
+  float period =  max_period * angledist;
+  int note_to_play = int((1.0 - angledist)*400.0 + note_A4 - 200.0);
   //delay(max_delay * (1 - angle_converted));
   if (ms_since_last_beep > period) {
     tone(buzzerPin, note_to_play, 50);
