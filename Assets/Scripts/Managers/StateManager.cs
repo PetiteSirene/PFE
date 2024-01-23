@@ -67,8 +67,6 @@ public class StateManager : MonoBehaviour
         switch (i)
         {
             case 0:
-                if (clouds)
-                {
                     float durationTransition = 2.0f;
                     float elapsedTime = 0.0f;
                     Vector3 startPos = TheVRObject.Instance.transform.localPosition;
@@ -78,16 +76,26 @@ public class StateManager : MonoBehaviour
                     {
                         TheVRObject.Instance.transform.localPosition = Vector3.Lerp(startPos, endPos, elapsedTime / durationTransition);
                         elapsedTime += Time.deltaTime;
-                        rightCloud.transform.Translate(Vector3.right * 2);
-                        leftCloud.transform.Translate(Vector3.left * 2);
                         yield return null;
-                    }   
-                    rightCloud.SetActive(false);
-                    leftCloud.SetActive(false);
-                }
+                    } 
                 break;
 
             case 1:
+                if (clouds)
+                {
+                    durationTransition = 2.0f;
+                    elapsedTime = 0.0f;
+
+                    while (elapsedTime < durationTransition)
+                    {
+                        elapsedTime += Time.deltaTime;
+                        rightCloud.transform.Translate(Vector3.right * 2);
+                        leftCloud.transform.Translate(Vector3.left * 2);
+                        yield return null;
+                    }
+                    rightCloud.SetActive(false);
+                    leftCloud.SetActive(false);
+                }
                 break;
             case 2:
                 break;

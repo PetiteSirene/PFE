@@ -105,12 +105,24 @@ public class SerialHandler : MonoBehaviour
             serial.WriteLine(angle.ToString(new CultureInfo("en-US")));   
         }
     }
-    
+
+    bool isBallOut = false;
     public void SendBallOut()
     {
+        isBallOut = true;
         ball.transform.SetParent(null);
         Debug.Log("BALL OUT!!!");
-        serial.WriteLine("Ball OUT");
+        //serial.WriteLine("Ball OUT");
+    }
+
+    public void SendBallInCloud()
+    {
+        Debug.Log("BALL IN CLOUD!!!");
+        if (isBallOut)
+        {
+            StateManager.Instance.AchievePhase(1);
+        }
+       
     }
 
     private void OnDestroy()
