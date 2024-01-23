@@ -6316,7 +6316,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   serialHandler: {fileID: 1637209422}
-  targetRotation: {x: 0, y: 0, z: 0}
+  targetRotation: {x: 180, y: 0, z: 0}
   initTimer: 0
   marginError: 10
 --- !u!114 &1637209422

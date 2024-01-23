@@ -38,7 +38,6 @@ public class VRObjectRotation : MonoBehaviour
     {
         Quaternion quat = GetRealRot(quat1);
         float angle = Quaternion.Angle(quat, Quaternion.Euler(targetRot));
-        Debug.Log(angle);
         return angle;
     }
 
