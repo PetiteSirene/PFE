@@ -40,10 +40,11 @@ float max_period = 2500; //en ms
 float period = max_period;
 int note_to_play = note_A4;
 
-bool should_beep = true;
+bool should_beep;
 
 
 void setup() {
+  should_beep = false;
   Wire.begin();
   Wire.setClock(400000); // 400kHz I2C clock. Comment this line if having compilation difficulties
 
@@ -198,14 +199,18 @@ void serialEvent()
   if (Serial.available() > 0)
   {
     String message = Serial.readStringUntil('\n');
-    if (message[0]= "a" && message.length() == 4)
+    if (message.length() == 3)
     {
-      String submessage =  message.substring(1);
-      float angledist = submessage.toInt()/180.0f;
+      float angledist = message.toInt()/180.0f;
       period =  max_period * (angledist + 0.05);
       note_to_play = int((1.0 - angledist)*600.0 + note_A4 - 300.0);
     }
-    else if (message[0]= "b")
+    else if (message == "b")
+    {
+      should_beep = true;
+      ms_since_last_beep = 0;
+    }
+    else if (message == "c")
     {
       should_beep = false;
     }

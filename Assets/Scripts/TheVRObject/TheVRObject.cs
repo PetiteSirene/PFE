@@ -49,6 +49,11 @@ public class TheVRObject : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.I))
             {
                 vrObjectRotation.InitRotation(inputRotation);
+                if (StateManager.Instance.CurrentPhase == 0)
+                {
+                    serialHandler.SendMessage("b");
+                }
+
             }
             if (StateManager.Instance.CurrentPhase == 0)
             {
@@ -59,9 +64,9 @@ public class TheVRObject : MonoBehaviour
                 if (vrObjectRotation.GetAngle(inputRotation, targetRotation) <= marginError && initTimer > 3f)
                 {
                     timeAtTarget += Time.deltaTime;
-                    if (timeAtTarget > 0.5f)
+                    if (timeAtTarget > 1f)
                     {
-                        StateManager.Instance.AchievePhase(0);
+                        WinGyro();
                     }
                 }
                 else 
@@ -151,6 +156,18 @@ public class TheVRObject : MonoBehaviour
             z = 0;
         }
         return new Vector3(x,y,z);
+    }
+
+    private void WinGyro()
+    {
+        StateManager.Instance.AchievePhase(0);
+        serialHandler.SendMessage("c");
+    }
+
+    public void WinLaby()
+    {
+        StateManager.Instance.AchievePhase(1);
+
     }
 
 }

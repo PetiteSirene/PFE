@@ -97,28 +97,13 @@ public class SerialHandler : MonoBehaviour
     public void SendAngularDifference(float angle)
     {
         int angle2 = (int) angle;
-        Debug.Log("a"+angle2.ToString("D3"));
-        serial.WriteLine("a"+angle2.ToString("D3"));//new CultureInfo("en-US")
+        serial.WriteLine(angle2.ToString("D3"));//new CultureInfo("en-US")
     }
 
-    bool isBallOut = false;
-
-    public void SendBallOut()
+    public void SendMessage(string message)
     {
-        isBallOut = true;
-        ball.transform.SetParent(null);
-        Debug.Log("BALL OUT!!!");
-        //serial.WriteLine("Ball OUT");
-    }
-
-    public void SendBallInCloud()
-    {
-        Debug.Log("BALL IN CLOUD!!!");
-        if (isBallOut)
-        {
-            StateManager.Instance.AchievePhase(1);
-        }
-       
+        Debug.Log(message);
+        serial.WriteLine(message);
     }
 
     private void OnDestroy()
