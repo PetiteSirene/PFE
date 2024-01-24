@@ -29,6 +29,20 @@ int oldTime;
 int timer;
 int ms_since_last_beep;
 
+
+int buzzerPin = 8;
+
+float note_A4 = 440.0;
+
+float max_delay = 1000.0;
+
+float max_period = 2500; //en ms
+float period = max_period;
+int note_to_play = note_A4;
+
+bool should_beep = true;
+
+
 void setup() {
   Wire.begin();
   Wire.setClock(400000); // 400kHz I2C clock. Comment this line if having compilation difficulties
@@ -112,6 +126,11 @@ void loop() {
   oldTime = timer;
   timer = millis();
   ms_since_last_beep += timer - oldTime;
+  if (should_beep && ms_since_last_beep > period) 
+    {
+      tone(buzzerPin, note_to_play, 50);
+      ms_since_last_beep -= period;
+    }
 }
 
 
@@ -174,31 +193,31 @@ void SendWorldAccel() {
 // Called by Arduino if any serial data has been received
 #include <math.h>
 
-int buzzerPin = 8;
-
-float note_A4 = 440.0;
-
-float max_delay = 1000.0;
-
 void serialEvent()
 {
-  String message = Serial.readStringUntil('\n');
-  /*if (message == "Ball OUT") {
+  if (Serial.available() > 0)
+  {
+    String message = Serial.readStringUntil('\n');
+    if (message[0]= "a" && message.length() == 4)
+    {
+      String submessage =  message.substring(1);
+      float angledist = submessage.toInt()/180.0f;
+      period =  max_period * (angledist + 0.05);
+      note_to_play = int((1.0 - angledist)*600.0 + note_A4 - 300.0);
+    }
+    else if (message[0]= "b")
+    {
+      should_beep = false;
+    }
+    /*if (message == "Ball OUT") {
     digitalWrite(LED,HIGH);
-  }*/
+    }*/
   
 
-  /* TODO: Reactivate code below (for angles) for later work */
+    /* TODO: Reactivate code below (for angles) for later work */
   
-  float angledist = message.toFloat()/180.0f;
-  Serial.println(angledist);
-  float max_period = 3000; //en ms
-  float period =  max_period * angledist;
-  int note_to_play = int((1.0 - angledist)*400.0 + note_A4 - 200.0);
-  //delay(max_delay * (1 - angle_converted));
-  if (ms_since_last_beep > period) {
-    tone(buzzerPin, note_to_play, 50);
-    ms_since_last_beep -= period;
+    
+    //delay(max_delay * (1 - angle_converted));
   }
   
 }

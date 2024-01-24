@@ -96,8 +96,9 @@ public class SerialHandler : MonoBehaviour
     /*TODO: Reactivate SendAngularDifference() for later work*/
     public void SendAngularDifference(float angle)
     {
-        Debug.Log(angle);
-        serial.WriteLine(angle.ToString(new CultureInfo("en-US")));
+        int angle2 = (int) angle;
+        Debug.Log("a"+angle2.ToString("D3"));
+        serial.WriteLine("a"+angle2.ToString("D3"));//new CultureInfo("en-US")
     }
 
     bool isBallOut = false;
