@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.VisualScripting;
 
 public class VRObjectBall : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class VRObjectBall : MonoBehaviour
     private float gravityScale = 50;
     [SerializeField]
     private Rigidbody rigidbodyy;
+    bool labyReady = false;
 
     // Update is called once per frame
     void Update()
@@ -21,9 +23,9 @@ public class VRObjectBall : MonoBehaviour
 
     void TryWinLaby()
     {
-        if (StateManager.Instance.CurrentPhase == labyPhase && gameObject.transform.position.y < minHeight)
+        if (labyReady && StateManager.Instance.CurrentPhase == labyPhase && gameObject.transform.position.y < minHeight)
         {
-            //StateManager.Instance.AchievePhase(labyPhase);
+            TheVRObject.Instance.WinLaby();
             Destroy(this);
         }
     }
@@ -34,6 +36,14 @@ public class VRObjectBall : MonoBehaviour
         if (rigidbodyy.velocity.y > 0)
         {
             rigidbodyy.AddForce(rigidbodyy.velocity.y * Vector3.down, ForceMode.VelocityChange);
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (!other.GetComponent<LabyEnd>().IsUnityNull())
+        {
+                transform.SetParent(null); 
         }
     }
 }

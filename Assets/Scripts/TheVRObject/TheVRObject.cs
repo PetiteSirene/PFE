@@ -158,7 +158,7 @@ public class TheVRObject : MonoBehaviour
         return new Vector3(x,y,z);
     }
 
-    private void WinGyro()
+    public void WinGyro()
     {
         StateManager.Instance.AchievePhase(0);
         serialHandler.SendMessage("c");

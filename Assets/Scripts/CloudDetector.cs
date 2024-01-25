@@ -8,7 +8,7 @@ public class CloudDetector : MonoBehaviour
     {
         if (other.name == "Ball")
         {
-            TheVRObject.Instance.WinLaby();
+            //TheVRObject.Instance.WinLaby();
         }
     }
 }

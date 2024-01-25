@@ -73,7 +73,7 @@ public class SerialHandler : MonoBehaviour
                         qCoeffs[i] = float.Parse(quaternionCoefficientText[i], new CultureInfo("en-US"));
                     }
 
-                    Quaternion objectRotation = new Quaternion(qCoeffs[0], -qCoeffs[1], -qCoeffs[2], qCoeffs[3]);
+                    Quaternion objectRotation = new Quaternion(qCoeffs[0], qCoeffs[1], qCoeffs[2], qCoeffs[3]);
                     //Vector3 objectRotationEuler = objectRotation.eulerAngles;
                     //Vector3 newObjectRotationEuler = new Vector3(-objectRotationEuler.y, objectRotationEuler.x, -objectRotationEuler.z);
 
