@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SoundManager : MonoBehaviour
 {
-    #region Singleton
+    // SINGLETON PART
     public static SoundManager Instance
     {
         get
@@ -20,7 +20,7 @@ public class SoundManager : MonoBehaviour
         }
     }
     private static SoundManager instance;
-    #endregion
+    //
 
     public AudioSource[] Jingles;
 
