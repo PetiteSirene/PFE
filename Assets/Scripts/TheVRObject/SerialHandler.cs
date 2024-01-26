@@ -65,6 +65,7 @@ public class SerialHandler : MonoBehaviour
                 // Arduino uses \r\n by default with `.println()`.
                 var message = serial.ReadLine().Trim().TrimStart('r', '/');
                 string[] quaternionCoefficientText = message.Split('/');
+                message = serial.ReadLine().Trim().TrimStart('r', '/');
                 if (quaternionCoefficientText.Length == 4)
                 {
                     float[] qCoeffs = new float[4];
