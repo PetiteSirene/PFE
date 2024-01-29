@@ -16,6 +16,8 @@ public class StateManager : MonoBehaviour
     
 
     private GameObject rightCloud, leftCloud;
+    private Transform VRObjectTransform;
+    [SerializeField] private VRObjectBall ball;
     [SerializeField] private List<Lamp> lamps;
 
     public bool clouds = true;
@@ -41,6 +43,7 @@ public class StateManager : MonoBehaviour
             rightCloud = GameObject.Find("RightGroup").gameObject;
             leftCloud = GameObject.Find("LeftGroup").gameObject;
         }
+        VRObjectTransform = TheVRObject.Instance.transform;
     }
 
     public void AchievePhase(int i)
@@ -70,15 +73,21 @@ public class StateManager : MonoBehaviour
             case 0:
                     float durationTransition = 2.0f;
                     float elapsedTime = 0.0f;
-                    Vector3 startPos = TheVRObject.Instance.transform.localPosition;
-                    Vector3 endPos = new Vector3(0f, 275f, 155);
+                    Vector3 startPos = VRObjectTransform.localPosition;
+                    Vector3 endPos = new Vector3(0f, 300f, 200f);
 
                     while (elapsedTime < durationTransition)
                     {
-                        TheVRObject.Instance.transform.localPosition = Vector3.Lerp(startPos, endPos, elapsedTime / durationTransition);
+                        float t = elapsedTime / durationTransition;
+                        VRObjectTransform.localPosition = Vector3.Lerp(startPos, endPos, t * t * (3f - 2f * t));
                         elapsedTime += Time.deltaTime;
                         yield return null;
                     } 
+                    VRObjectTransform.localPosition = endPos;
+                    if (ball != null)
+                    {
+                        ball.labyReady = true;
+                    }
                 break;
 
             case 1:
@@ -86,14 +95,24 @@ public class StateManager : MonoBehaviour
                 {
                     durationTransition = 2.0f;
                     elapsedTime = 0.0f;
+                    startPos = VRObjectTransform.localPosition;
+                    endPos = new Vector3(0f, 600f, 200f);
+                    TheVRObject.Instance.FaceController.Enable();
+
+                    Quaternion startRotation = VRObjectTransform.rotation;
+                    Quaternion targetRotation = Quaternion.Euler(0, 0, 0);
 
                     while (elapsedTime < durationTransition)
-                    {
-                        elapsedTime += Time.deltaTime;
+                    {   
+                        float t = elapsedTime / durationTransition;
                         rightCloud.transform.Translate(Vector3.right * 2);
                         leftCloud.transform.Translate(Vector3.left * 2);
+                        VRObjectTransform.localPosition = Vector3.Lerp(startPos, endPos, t * t * (3f - 2f * t));
+                        VRObjectTransform.rotation = Quaternion.Slerp(startRotation, targetRotation, t * t * (3f - 2f * t));
+                        elapsedTime += Time.deltaTime;
                         yield return null;
                     }
+                    VRObjectTransform.localPosition = endPos;
                     rightCloud.SetActive(false);
                     leftCloud.SetActive(false);
                 }

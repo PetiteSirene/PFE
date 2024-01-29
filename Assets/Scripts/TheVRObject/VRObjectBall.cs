@@ -12,7 +12,7 @@ public class VRObjectBall : MonoBehaviour
     private float gravityScale = 50;
     [SerializeField]
     private Rigidbody rigidbodyy;
-    bool labyReady = false;
+    public bool labyReady = false;
 
     // Update is called once per frame
     void Update()

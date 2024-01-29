@@ -103,8 +103,11 @@ public class SerialHandler : MonoBehaviour
 
     public void SendMessage(string message)
     {
-        Debug.Log(message);
-        serial.WriteLine(message);
+        if (!ArduinoNotConnected)
+        {
+            Debug.Log(message);
+            serial.WriteLine(message);
+        }
     }
 
     private void OnDestroy()

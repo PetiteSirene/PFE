@@ -12,6 +12,9 @@ public class TheVRObject : MonoBehaviour
     private VRObjectRotation vrObjectRotation;
     public SerialHandler serialHandler;
 
+    private FaceController faceController;
+    public FaceController FaceController => faceController;
+
     [SerializeField] Vector3 targetRotation;
     [SerializeField] private float initTimer;
 
@@ -34,6 +37,7 @@ public class TheVRObject : MonoBehaviour
     {
         vrObjectRotation = GetComponent<VRObjectRotation>();
         serialHandler = GetComponent<SerialHandler>();
+        faceController = GetComponent<FaceController>();
     }
 
     private Quaternion inputRotation;
