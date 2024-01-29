@@ -8,6 +8,8 @@ public class VRObjectLaser : MonoBehaviour
     [SerializeField] private float laserRange;
     [SerializeField] private GameObject impactPoint;
     [SerializeField] private LayerMask collisionLayer;
+    [SerializeField] private LaserTarget laserTarget;
+    public bool isActive = false;
 
     void Awake()
     {
@@ -16,14 +18,17 @@ public class VRObjectLaser : MonoBehaviour
 
     void Update()
     {
-        CastLaser();
+        if(isActive)
+        {
+            CastLaser();
+        }
     }
 
     private void CastLaser()
     {
         Vector3 initialPos = transform.position;
         RaycastHit hit;
-        if (Physics.Raycast(initialPos, transform.forward, out hit, laserRange, collisionLayer))
+        if (Physics.Raycast(initialPos, laserTarget.transform.position - initialPos, out hit, laserRange, collisionLayer))
         {
             impactPoint.transform.position = hit.point;
             impactPoint.SetActive(true);
@@ -34,7 +39,7 @@ public class VRObjectLaser : MonoBehaviour
         {
             impactPoint.SetActive(false);
             lineRenderer.SetPosition(0, initialPos);
-            lineRenderer.SetPosition(1, initialPos + 100 * transform.forward);
+            lineRenderer.SetPosition(1, initialPos + laserRange * (laserTarget.transform.position - initialPos));
         }
     }
 }
