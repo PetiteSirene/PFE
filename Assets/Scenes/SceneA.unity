@@ -11798,7 +11798,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ball: {fileID: 1230295798}
-  serialPort: COM7
+  serialPort: COM5
   baudrate: 115200
 --- !u!114 &1637209423
 MonoBehaviour:

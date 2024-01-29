@@ -80,7 +80,8 @@ public class SerialHandler : MonoBehaviour
                     Quaternion transferQuaternion = Quaternion.Euler(0, 180, 0);
                     //Quaternion transferQuaternion1 = Quaternion.Euler(0, 180, 90);
                     //Quaternion objectRotationLeftHanded = new Quaternion(-objectRotation.x, -objectRotation.z, -objectRotation.y, objectRotation.w);
-                    Quaternion objectRotationLeftHanded = new Quaternion(-objectRotation.z, objectRotation.x, objectRotation.y, objectRotation.w);
+                    //Quaternion objectRotationLeftHanded = new Quaternion(-objectRotation.z, objectRotation.x, objectRotation.y, objectRotation.w);
+                    Quaternion objectRotationLeftHanded = new Quaternion(-objectRotation.z, -objectRotation.w, objectRotation.y, objectRotation.x);
 
                     ReceivedQuaternion = transferQuaternion * objectRotationLeftHanded  /*Quaternion.Euler(newObjectRotationEuler)*/;
                 }
