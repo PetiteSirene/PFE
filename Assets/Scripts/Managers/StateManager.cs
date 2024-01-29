@@ -51,6 +51,8 @@ public class StateManager : MonoBehaviour
         if (currentPhase == i)
         {
             StartCoroutine(ToDoAtEndPhase(i));
+            if (SoundManager.Instance.Jingles[i] == null)
+                return;
             SoundManager.Instance.Jingles[i].Play();
 
         }

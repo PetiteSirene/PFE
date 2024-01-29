@@ -3645,6 +3645,7 @@ MonoBehaviour:
   Jingles:
   - {fileID: 449343744}
   - {fileID: 449343743}
+  - {fileID: 449343744}
 --- !u!1001 &473430144
 PrefabInstance:
   m_ObjectHideFlags: 0
