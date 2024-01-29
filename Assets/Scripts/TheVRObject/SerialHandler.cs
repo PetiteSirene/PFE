@@ -63,9 +63,8 @@ public class SerialHandler : MonoBehaviour
                 if (serial.BytesToRead <= 0) return;
                 // Trim leading and trailing whitespaces, makes it easier to handle different line endings.
                 // Arduino uses \r\n by default with `.println()`.
-                var message = serial.ReadLine().Trim().TrimStart('r', '/');
-                string[] quaternionCoefficientText = message.Split('/');
-                message = serial.ReadLine().Trim().TrimStart('r', '/');
+                
+                string[] quaternionCoefficientText = ReadMessage(2);
                 if (quaternionCoefficientText.Length == 4)
                 {
                     float[] qCoeffs = new float[4];
@@ -99,6 +98,21 @@ public class SerialHandler : MonoBehaviour
     {
         int angle2 = (int) angle;
         serial.WriteLine(angle2.ToString("D3"));//new CultureInfo("en-US")
+    }
+
+    public string[] ReadMessage(int n)
+    {
+        var message = serial.ReadLine().Trim().TrimStart('r', '/');
+        for (int i = 1; i<n; i++)
+        {   
+            if (serial.BytesToRead > 0)
+            {
+                message = serial.ReadLine().Trim().TrimStart('r', '/');
+            }
+        }
+        string[] quaternionCoefficientText = message.Split('/');
+        return quaternionCoefficientText;
+
     }
 
     public void SendMessage(string message)
