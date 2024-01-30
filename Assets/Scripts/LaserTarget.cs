@@ -93,8 +93,23 @@ public class LaserTarget : MonoBehaviour
     public void Move(Vector3 vec)
     {
         //StartCoroutine(MoveCoroutine(duration, speed * vec.x, speed * vec.z));
-        TryTranslateX(speed * vec.x * Time.deltaTime );
-        TryTranslateZ(speed * vec.z * Time.deltaTime );
+        if (vec.x < 180f)
+        {
+            TryTranslateX(speed * vec.x * Time.deltaTime );
+        }
+        else
+        {
+            TryTranslateX(speed * (vec.x - 360f) * Time.deltaTime );
+        }
+         if (vec.y < 180f)
+        {
+            TryTranslateZ(speed * vec.z * Time.deltaTime );
+        }
+        else
+        {
+            TryTranslateZ(speed * (vec.z - 360f) * Time.deltaTime );
+        }
+        
     }
 
 
