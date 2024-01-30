@@ -20,6 +20,8 @@ public class TheVRObject : MonoBehaviour
     [SerializeField] Vector3 targetRotation;
     [SerializeField] private float initTimer;
 
+    private bool canControlLaser = false;
+
     private void Awake()
     {
         if (instance != null && instance != this)
@@ -179,6 +181,12 @@ public class TheVRObject : MonoBehaviour
     {
         StateManager.Instance.AchievePhase(1);
 
+    }
+
+    public void StartLaserPhase()
+    {
+        vrObjectRotation.InitRotation(inputRotation);
+        canControlLaser =true;
     }
 
 }

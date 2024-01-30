@@ -18,6 +18,7 @@ public class StateManager : MonoBehaviour
     private GameObject rightCloud, leftCloud;
     private Transform VRObjectTransform;
     [SerializeField] private VRObjectBall ball;
+    [SerializeField] private VRObjectLaser laser;
     [SerializeField] private List<Lamp> lamps;
 
     public bool clouds = true;
@@ -114,6 +115,8 @@ public class StateManager : MonoBehaviour
                         elapsedTime += Time.deltaTime;
                         yield return null;
                     }
+                    TheVRObject.Instance.StartLaserPhase();
+                    laser.isActive = true;
                     VRObjectTransform.localPosition = endPos;
                     rightCloud.SetActive(false);
                     leftCloud.SetActive(false);

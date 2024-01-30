@@ -3423,6 +3423,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ball: {fileID: 875462870}
+  laser: {fileID: 1972041157}
   lamps: []
   clouds: 1
 --- !u!4 &449343742
@@ -14328,6 +14329,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1962848336}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1972041157 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6433770527046153778, guid: 51f93721be97de149a037b008fa37d54,
+    type: 3}
+  m_PrefabInstance: {fileID: 473430144}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09109b8ea74f1784dad50d93ba9f61e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1972255700
 GameObject:
   m_ObjectHideFlags: 0
