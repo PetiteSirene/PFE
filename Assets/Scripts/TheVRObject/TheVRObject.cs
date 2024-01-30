@@ -91,7 +91,6 @@ public class TheVRObject : MonoBehaviour
             else if (StateManager.Instance.CurrentPhase == 2)
             {
                 Quaternion realRot = vrObjectRotation.GetRealRot(inputRotation);
-                Debug.Log(realRot.eulerAngles);
                 laserTarget.Move(realRot.eulerAngles);
                 vrObjectRotation.InitRotation(inputRotation);
             }

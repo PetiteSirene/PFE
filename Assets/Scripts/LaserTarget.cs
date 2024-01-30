@@ -101,7 +101,7 @@ public class LaserTarget : MonoBehaviour
         {
             TryTranslateX(-speed * (vec.x - 360f)* (vec.x - 360f) * Time.deltaTime );
         }
-         if (vec.y < 180f)
+         if (vec.z < 180f)
         {
             TryTranslateZ(speed * vec.z * vec.z * Time.deltaTime );
         }
