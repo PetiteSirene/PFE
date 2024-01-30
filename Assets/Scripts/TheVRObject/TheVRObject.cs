@@ -12,6 +12,8 @@ public class TheVRObject : MonoBehaviour
     private VRObjectRotation vrObjectRotation;
     public SerialHandler serialHandler;
 
+    [SerializeField] private LaserTarget laserTarget;
+
     private FaceController faceController;
     public FaceController FaceController => faceController;
 
@@ -80,10 +82,15 @@ public class TheVRObject : MonoBehaviour
 
 
             }
-
-            if (StateManager.Instance.CurrentPhase == 1)
+            else if (StateManager.Instance.CurrentPhase == 1)
             {
                 vrObjectRotation.SetRotation(inputRotation);
+            }
+            else if (StateManager.Instance.CurrentPhase == 2)
+            {
+                Quaternion realRot = vrObjectRotation.GetRealRot(inputRotation);
+                laserTarget.Move(realRot.eulerAngles);
+                vrObjectRotation.InitRotation(inputRotation);
             }
         }
         else

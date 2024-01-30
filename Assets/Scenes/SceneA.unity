@@ -750,6 +750,8 @@ MonoBehaviour:
   maxX: 250
   minZ: 0
   maxZ: 700
+  speed: 10
+  duration: 1
 --- !u!135 &115494027
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -767,7 +769,7 @@ SphereCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
@@ -778,7 +780,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 115494025}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -11783,6 +11785,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   serialHandler: {fileID: 1637209422}
+  laserTarget: {fileID: 115494026}
   targetRotation: {x: 0, y: -130, z: 45}
   initTimer: 0
   marginError: 15

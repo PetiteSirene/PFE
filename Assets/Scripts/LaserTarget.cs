@@ -6,8 +6,12 @@ public class LaserTarget : MonoBehaviour
 {
     [SerializeField] float minX, maxX, minZ, maxZ;
 
+    [SerializeField] float speed;
+    [SerializeField] float duration;
 
-    private IEnumerator Move(float duration, float xAmount, float zAmount)
+
+
+    private IEnumerator MoveCoroutine(float duration, float xAmount, float zAmount)
     {
         float timer = 0f;
         while (timer < duration)
@@ -85,4 +89,11 @@ public class LaserTarget : MonoBehaviour
         newPos.z = z;
         transform.position = newPos;
     }
+
+    public void Move(Vector3 vec)
+    {
+        StartCoroutine(MoveCoroutine(duration, speed * vec.x, speed * vec.z));
+    }
+
+
 }
