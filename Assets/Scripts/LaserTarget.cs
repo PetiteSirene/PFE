@@ -95,19 +95,19 @@ public class LaserTarget : MonoBehaviour
         //StartCoroutine(MoveCoroutine(duration, speed * vec.x, speed * vec.z));
         if (vec.x < 180f)
         {
-            TryTranslateX(speed * vec.x * Time.deltaTime );
+            TryTranslateX(speed * vec.x*vec.x * Time.deltaTime );
         }
         else
         {
-            TryTranslateX(speed * (vec.x - 360f) * Time.deltaTime );
+            TryTranslateX(-speed * (vec.x - 360f)* (vec.x - 360f) * Time.deltaTime );
         }
          if (vec.y < 180f)
         {
-            TryTranslateZ(speed * vec.z * Time.deltaTime );
+            TryTranslateZ(speed * vec.z * vec.z * Time.deltaTime );
         }
         else
         {
-            TryTranslateZ(speed * (vec.z - 360f) * Time.deltaTime );
+            TryTranslateZ(-speed * (vec.z - 360f) * (vec.z - 360f) * Time.deltaTime );
         }
         
     }

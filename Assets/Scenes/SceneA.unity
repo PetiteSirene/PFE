@@ -750,7 +750,7 @@ MonoBehaviour:
   maxX: 250
   minZ: 0
   maxZ: 700
-  speed: 0.4
+  speed: 0.1
   duration: 1
 --- !u!135 &115494027
 SphereCollider:
