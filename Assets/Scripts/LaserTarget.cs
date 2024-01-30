@@ -54,7 +54,7 @@ public class LaserTarget : MonoBehaviour
     {
         if(amount > 0)
         {
-            if(transform.position.y + amount > maxZ)
+            if(transform.position.z + amount > maxZ)
             {
                 SetZ(maxZ);
             }
@@ -65,7 +65,7 @@ public class LaserTarget : MonoBehaviour
         }
         else
         {
-            if(transform.position.y + amount < minZ)
+            if(transform.position.z + amount < minZ)
             {
                 SetZ(minZ);
             }
@@ -92,7 +92,9 @@ public class LaserTarget : MonoBehaviour
 
     public void Move(Vector3 vec)
     {
-        StartCoroutine(MoveCoroutine(duration, speed * vec.x, speed * vec.z));
+        //StartCoroutine(MoveCoroutine(duration, speed * vec.x, speed * vec.z));
+        TryTranslateX(speed * vec.x * Time.deltaTime );
+        TryTranslateZ(speed * vec.z * Time.deltaTime );
     }
 
 
