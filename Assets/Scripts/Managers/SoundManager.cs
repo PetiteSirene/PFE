@@ -22,8 +22,8 @@ public class SoundManager : MonoBehaviour
     private static SoundManager instance;
     //
 
-    public AudioSource[] Jingles;
-
-
+    public AudioSource[] jingles;
+    public AudioSource[] ambiences;
+    public AudioSource[] soundEffects;
 
 }

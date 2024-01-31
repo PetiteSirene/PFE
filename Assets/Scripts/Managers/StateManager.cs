@@ -52,9 +52,12 @@ public class StateManager : MonoBehaviour
         if (currentPhase == i)
         {
             StartCoroutine(ToDoAtEndPhase(i));
-            if (SoundManager.Instance.Jingles[i] == null)
+            if (SoundManager.Instance.jingles[i] == null)
                 return;
-            SoundManager.Instance.Jingles[i].Play();
+            SoundManager.Instance.jingles[i].Play();
+            if (i > 0)
+                SoundManager.Instance.ambiences[i-1].Stop();;
+            SoundManager.Instance.ambiences[i].Play();
 
         }
     }
