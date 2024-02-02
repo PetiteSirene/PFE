@@ -9,6 +9,7 @@ public class LaserImpact : MonoBehaviour
     {
         if (!other.GetComponent<Lamp>().IsUnityNull())
         {
+            Debug.Log("aaaa");
             other.GetComponent<Lamp>().Lit();
         }
     }
