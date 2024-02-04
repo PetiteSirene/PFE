@@ -23,7 +23,7 @@ public class FaceController : MonoBehaviour
     {
         if (enabled)
         {
-            float x = 0.5f + 0.5f * Mathf.Sin(Time.time - startTime);
+            float x = 0.5f - 0.5f * Mathf.Cos(Time.time - startTime);
             Vector3 pos = transform.position;
             Quaternion rot = transform.rotation;
             foreach(Face face in faces)
