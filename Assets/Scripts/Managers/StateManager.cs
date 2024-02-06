@@ -13,6 +13,7 @@ public class StateManager : MonoBehaviour
     public int CurrentPhase => currentPhase;
     private int laserPhase = 2;
     private int maxPhase = 3;
+    [SerializeField] private BlackFade blackFade;
     
 
     private GameObject rightCloud, leftCloud;
@@ -126,6 +127,7 @@ public class StateManager : MonoBehaviour
                 }
                 break;
             case 2:
+                blackFade.Unfade();
                 break;
             case 3:
                 break;
